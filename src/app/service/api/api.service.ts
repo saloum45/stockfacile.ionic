@@ -190,7 +190,7 @@ export class ApiService {
 
   Swal_success(title: any) {
     let succes = Swal.fire({
-      position: 'top-end',
+      position: 'bottom',
       icon: 'success',
       title: title,
       showConfirmButton: false,
@@ -203,7 +203,7 @@ export class ApiService {
 
   Swal_error(title: any) {
     let succes = Swal.fire({
-      position: 'top-end',
+      position: 'bottom',
       icon: 'error',
       title: title,
       showConfirmButton: false,
@@ -215,7 +215,7 @@ export class ApiService {
   }
   Swal_info(title: any) {
     let succes = Swal.fire({
-      position: 'top-end',
+      position: 'bottom',
       icon: 'info',
       title: title,
       showConfirmButton: false,
@@ -227,7 +227,7 @@ export class ApiService {
   }
   Swal_blue(title: any) {
     let succes = Swal.fire({
-      position: 'top-end',
+      position: 'bottom',
       icon: 'info',
       title: title,
       showConfirmButton: false,
