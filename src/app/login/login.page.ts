@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
 
         // 👉 Attendre fin anim puis naviguer
         setTimeout(() => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['tabs']);
         }, 1000); // doit correspondre à la durée CSS
       } else {
         console.log("L'opération sur la table login a échoué. Réponse= ", reponse);
