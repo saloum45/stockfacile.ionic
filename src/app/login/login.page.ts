@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api/api.service';
 import { SharedModuleModule } from '../shared-module/shared-module-module';
@@ -12,7 +11,7 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonContent,IonicModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule,IonicModule,ReactiveFormsModule],
 })
 export class LoginPage implements OnInit {
 
