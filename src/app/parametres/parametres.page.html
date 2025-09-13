@@ -10,72 +10,77 @@
       <ion-title size="large">parametres</ion-title>
     </ion-toolbar>
   </ion-header>
+
   <ion-row class="ion-padding-top ion-padding-bottom">
+    <ion-col size="12">
+      <!--Using items input-->
+      <ng-select [items]="cars" bindLabel="name" bindValue="id" [(ngModel)]="selectedCar">
+      </ng-select>
+    </ion-col>
+    <ion-col size="4" class="text-center">
+      <ion-card class="menu-card">
+        <ion-card-content>
+          <i class="bi bi-bag fs-2 icon-color"></i>
+          <p class="label">Produits</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
 
-  <ion-col size="4" class="text-center">
-    <ion-card class="menu-card">
-      <ion-card-content>
-        <i class="bi bi-bag fs-2 icon-color"></i>
-        <p class="label">Produits</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
+    <ion-col size="4" class="text-center">
+      <ion-card class="menu-card">
+        <ion-card-content>
+          <i class="bi bi-truck fs-2 icon-color"></i>
+          <p class="label">Achats</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
 
-  <ion-col size="4" class="text-center">
-    <ion-card class="menu-card">
-      <ion-card-content>
-        <i class="bi bi-truck fs-2 icon-color"></i>
-        <p class="label">Achats</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
+    <ion-col size="4" class="text-center">
+      <ion-card class="menu-card">
+        <ion-card-content>
+          <i class="bi bi-clipboard-data fs-2 icon-color"></i>
+          <p class="label">Inventaire</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
 
-  <ion-col size="4" class="text-center">
-    <ion-card class="menu-card">
-      <ion-card-content>
-        <i class="bi bi-clipboard-data fs-2 icon-color"></i>
-        <p class="label">Inventaire</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
+    <ion-col size="4" class="text-center">
+      <ion-card class="menu-card">
+        <ion-card-content>
+          <i class="bi bi-people fs-2 icon-color"></i>
+          <p class="label">Clients</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
 
-  <ion-col size="4" class="text-center">
-    <ion-card class="menu-card">
-      <ion-card-content>
-        <i class="bi bi-people fs-2 icon-color"></i>
-        <p class="label">Clients</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
+    <ion-col size="4" class="text-center">
+      <ion-card class="menu-card">
+        <ion-card-content>
+          <i class="bi bi-journal-text fs-2 icon-color"></i>
+          <p class="label">Comptable</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
 
-  <ion-col size="4" class="text-center">
-    <ion-card class="menu-card">
-      <ion-card-content>
-        <i class="bi bi-journal-text fs-2 icon-color"></i>
-        <p class="label">Comptable</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
-
-  <ion-col size="4" class="text-center">
-    <ion-card class="menu-card">
-      <ion-card-content>
-        <i class="bi bi-person-lines-fill fs-2 icon-color"></i>
-        <p class="label">Utilisateurs</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
-  <ion-col size="12" class="text-center">
-    <ion-button class=" rounded rounded-3" style="--background: var(--base-color);">
-      <i class="bi bi-box-arrow-left me-2"></i> Déconnexion
-    </ion-button>
-    <!-- <ion-card class="menu-card">
+    <ion-col size="4" class="text-center">
+      <ion-card class="menu-card">
+        <ion-card-content>
+          <i class="bi bi-person-lines-fill fs-2 icon-color"></i>
+          <p class="label">Utilisateurs</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12" class="text-center">
+      <ion-button class=" rounded rounded-3" style="--background: var(--base-color);">
+        <i class="bi bi-box-arrow-left me-2"></i> Déconnexion
+      </ion-button>
+      <!-- <ion-card class="menu-card">
       <ion-card-content>
         <i class="bi bi-person-lines-fill fs-2 icon-color"></i>
         <p class="label">Utilisateurs</p>
       </ion-card-content>
     </ion-card> -->
-  </ion-col>
+    </ion-col>
 
-</ion-row>
+  </ion-row>
 </ion-content>
