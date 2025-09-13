@@ -2,6 +2,18 @@
   <ion-toolbar>
     <ion-title class="fw-bold" style="--color:var(--base-color)">Vue globale</ion-title>
   </ion-toolbar>
+  <!-- Filtre par période -->
+  @if(filter.typeFiltre === 'periode'){
+  <div class="col-md-8 px-3">
+    <select class="form-select" [(ngModel)]="filter.periode" (change)="filtrer()">
+      <option value="annuel">Annuel</option>
+      <option value="aujourd'hui">Aujourd'hui</option>
+      <option value="7jours">7 derniers jours</option>
+      <option value="15jours">15 derniers jours</option>
+      <option value="30jours">30 derniers jours</option>
+    </select>
+  </div>
+  }
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
