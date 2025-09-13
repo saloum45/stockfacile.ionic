@@ -10,6 +10,7 @@
     <button (click)="tabs_choice_change(2)" [ngClass]="{'tabs-choises_button_active':tabs_choice==2}">Dette</button>
     <button (click)="tabs_choice_change(3)" [ngClass]="{'tabs-choises_button_active':tabs_choice==3}">Sans</button>
   </div>
+  <ion-button class=" rounded rounded-3" style="--background: var(--base-color);" (click)="openModal_add_ventes()"><i class="bi bi-plus-square-dotted me-1"></i>Ventes</ion-button>
   <!-- Liste des ventes -->
   @if (!loading_get_ventes && list.length > 0) {
   <ion-list>

@@ -147,3 +147,12 @@ label {
 .tabs-choises button:hover {
   color: #233C6C;
 }
+
+
+// validate. button
+.validate-button{
+  background-color: var(--base-color);
+  color: white !important;
+  height: 50px;
+  font-weight: bold;
+}
