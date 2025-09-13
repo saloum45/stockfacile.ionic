@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="m-0">Top 5 produits les plus vendus</h5>
+  </div>
+  <div class="card-body">
+    <apx-chart [series]="topProductsChart.series" [chart]="topProductsChart.chart"
+      [plotOptions]="topProductsChart.plotOptions" [labels]="topProductsChart.labels"
+      [tooltip]="topProductsChart.tooltip" [legend]="topProductsChart.legend" [colors]="topProductsChart.colors">
+    </apx-chart>
+  </div>
+</div>

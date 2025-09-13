@@ -8,13 +8,16 @@ import { ApiService } from '../service/api/api.service';
 import { EvolutionVenteAchat } from '../components/dashboards/evolution-vente-achat/evolution-vente-achat';
 import { Benefice } from '../components/dashboards/benefice/benefice';
 import { ModePaiement } from '../components/dashboards/mode-paiement/mode-paiement';
+import { VentesParHeure } from '../components/dashboards/ventes-par-heure/ventes-par-heure';
+import { AlertesStock } from '../components/dashboards/alertes-stock/alertes-stock';
+import { TopProduitVendu } from '../components/dashboards/top-produit-vendu/top-produit-vendu';
 
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.page.html',
   styleUrls: ['./accueil.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,EvolutionVenteAchat,Benefice,ModePaiement]
+  imports: [IonicModule, CommonModule, FormsModule,EvolutionVenteAchat,Benefice,ModePaiement,VentesParHeure,AlertesStock,TopProduitVendu]
 })
 export class AccueilPage implements OnInit {
 

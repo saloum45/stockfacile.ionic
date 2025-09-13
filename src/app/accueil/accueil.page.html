@@ -51,11 +51,25 @@
       <app-evolution-vente-achat
         [data]="{ventes:dashboard?.ventes,approvisionnements:dashboard?.approvisionnements}"></app-evolution-vente-achat>
     </ion-col>
+
     <ion-col size="12">
       <app-mode-paiement [data]="this.dashboard?.mode_paiement"></app-mode-paiement>
     </ion-col>
+
     <ion-col size="12">
       <app-benefice [data]="{ventes:dashboard?.ventes,approvisionnements:dashboard?.approvisionnements}"></app-benefice>
+    </ion-col>
+
+    <ion-col size="12">
+      <app-top-produit-vendu [data]="this.dashboard?.top_produit_vendu"></app-top-produit-vendu>
+    </ion-col>
+
+    <ion-col size="12">
+      <app-ventes-par-heure [data]="this.dashboard?.ventes"></app-ventes-par-heure>
+    </ion-col>
+
+    <ion-col size="12">
+      <app-alertes-stock [data]="this.dashboard?.stock_par_rangement"></app-alertes-stock>
     </ion-col>
   </ion-row>
 </ion-content>

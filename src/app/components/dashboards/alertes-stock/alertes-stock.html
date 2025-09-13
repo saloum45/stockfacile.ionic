@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="m-0">Alertes de stock</h5>
+  </div>
+  <div class="card-body" style="max-height: 300px;overflow-y: auto;">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th>Stock</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [class]="alert.couleur" *ngFor="let alert of data">
+            <td>{{ alert.libelle_produit }}</td>
+            <td>{{ alert.quantite_total }}</td>
+            <td>{{ alert.statut }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
