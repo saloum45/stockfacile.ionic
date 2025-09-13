@@ -35,3 +35,78 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+
+:root {
+  --primary-color: #233C6C;
+  /* Couleur principale : vert */
+  --btn-primary: #233C6C;
+  /* Couleur principale : vert */
+  --secondary-color: #2196f3;
+  /* Couleur secondaire : bleu */
+  --success-color: #66BB6A;
+  /* Vert clair pour les succès */
+  --danger-color: #ef5350;
+  /* Rouge doux pour les alertes */
+  --warning-color: #FFEB3B;
+  /* Jaune doux pour les avertissements */
+  --info-color: #BBDEFB;
+  /* Bleu clair pour les informations */
+  --light-color: #f5f5f5;
+  /* Couleur de fond clair */
+  --dark-color: #233446;
+  /* Couleur de texte foncé */
+
+  --bs-btn-active-bg: #233C6C;
+
+  /* remplace le primary de Bootstrap */
+  --bs-primary: #233C6C;
+  --bs-secondary: #2196f3;
+  --bs-success: #66BB6A;
+  --bs-danger: #ef5350;
+  --bs-warning: #FFEB3B;
+  --bs-info: #BBDEFB;
+  --bs-light: #f5f5f5;
+  --bs-dark: #233446;
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: var(--primary-color) !important;
+  /* Couleur de fond au clic */
+  // border-color: var(--primary-color); /* Assurez-vous que la bordure correspond si nécessaire */
+  border: 1px var(--primary-color) solid !important;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color) !important;
+  /* Couleur de fond au clic */
+  border: 1px var(--primary-color) solid !important;
+}
+
+.btn-outline-primary:hover {
+  color: var(--primary-color) !important;
+  /* Couleur de fond au clic */
+  border: 2px var(--primary-color) solid !important;
+  background-color: white !important;
+}
+
+.btn-primary:hover {
+  border: 2px var(--primary-color) solid !important;
+}
+
+.text-primary-base {
+  color: var(--primary-color) !important;
+  /* Couleur de fond au clic */
+}
+
+.text-primary-base-base {
+  color: var(--primary-color) !important;
+  /* Couleur de fond au clic */
+}
+
+label {
+  color: #91959c !important;
+}

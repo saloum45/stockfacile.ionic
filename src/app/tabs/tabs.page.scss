@@ -1,1 +1,8 @@
-
+ion-tab-bar {
+  --background: var(--primary-color);
+  /* Change la couleur de fond ici */
+  --color: white;
+  /* Change la couleur du texte ici */
+  --color-selected: #4CF4F5;
+  /* Change la couleur de l'onglet sélectionné */
+}
