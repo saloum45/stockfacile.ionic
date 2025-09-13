@@ -5,12 +5,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <div class="tabs-choises d-flex justify-content-between p-2 m-auto col-2 mb-2">
-    <button (click)="tabs_choice_change(1)" [ngClass]="{'tabs-choises_button_active':tabs_choice==1}">Toutes</button>
-    <button (click)="tabs_choice_change(2)" [ngClass]="{'tabs-choises_button_active':tabs_choice==2}">Dette</button>
-    <button (click)="tabs_choice_change(3)" [ngClass]="{'tabs-choises_button_active':tabs_choice==3}">Sans</button>
+  <div class="d-flex w-100">
+    <div class="tabs-choises d-flex justify-content-between p-2 m-auto w-75">
+      <button (click)="tabs_choice_change(1)" [ngClass]="{'tabs-choises_button_active':tabs_choice==1}">Toutes</button>
+      <button (click)="tabs_choice_change(2)" [ngClass]="{'tabs-choises_button_active':tabs_choice==2}">Dette</button>
+      <button (click)="tabs_choice_change(3)" [ngClass]="{'tabs-choises_button_active':tabs_choice==3}">Sans</button>
+    </div>
+    <ion-button class="w-25 ms-2 rounded rounded-3" style="--background: var(--base-color);" (click)="openModal_add_ventes()"><i
+        class="bi bi-plus-square-dotted me-1"></i></ion-button>
   </div>
-  <ion-button class=" rounded rounded-3" style="--background: var(--base-color);" (click)="openModal_add_ventes()"><i class="bi bi-plus-square-dotted me-1"></i>Ventes</ion-button>
   <!-- Liste des ventes -->
   @if (!loading_get_ventes && list.length > 0) {
   <ion-list>
