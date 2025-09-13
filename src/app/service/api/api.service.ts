@@ -31,8 +31,8 @@ export class ApiService {
     // is_expired: null,
     // date_expiration: null
   }
-  id_current_entreprise: any = this.get_from_local_storage("id_current_entreprise") ?? '{}';
-  id_current_privilege: any = this.get_from_local_storage("id_current_privilege") ?? '{}';
+  id_current_entreprise: any = this.get_from_local_storage("id_current_entreprise") ?? 0;
+  id_current_privilege: any = this.get_from_local_storage("id_current_privilege") ?? '';
   loading_current_entreprise = false;
 
   constructor(private http: HttpClient, private route: Router, private shared_preferences: SharedPreferences, public _location: Location) { }
