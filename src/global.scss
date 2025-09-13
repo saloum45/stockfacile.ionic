@@ -115,3 +115,35 @@
 label {
   color: #91959c !important;
 }
+
+
+
+// tabs style
+.tabs-choises {
+  border-radius: 10px;
+  width: 90%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tabs-choises button {
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid white;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  width: 30%;
+  font-size: 12px;
+  font-weight: bold;
+  color: #233C6C;
+  // color: var(--darkbluecolor);
+}
+
+.tabs-choises_button_active {
+  color: white !important;
+  background-color: #233C6C !important;
+  // background-color: var(--darkbluecolor) !important;
+}
+
+.tabs-choises button:hover {
+  color: #233C6C;
+}

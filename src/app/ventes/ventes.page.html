@@ -5,17 +5,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-
+  <div class="tabs-choises d-flex justify-content-between p-2 m-auto col-2 mb-2">
+    <button (click)="tabs_choice_change(1)" [ngClass]="{'tabs-choises_button_active':tabs_choice==1}">Toutes</button>
+    <button (click)="tabs_choice_change(2)" [ngClass]="{'tabs-choises_button_active':tabs_choice==2}">Dette</button>
+    <button (click)="tabs_choice_change(3)" [ngClass]="{'tabs-choises_button_active':tabs_choice==3}">Sans</button>
+  </div>
   <!-- Liste des ventes -->
   @if (!loading_get_ventes && list.length > 0) {
   <ion-list>
     @for (une_vente of list; track une_vente) {
-    <ion-item button (click)="openModal_detail_vente(une_vente)" class="vente-item">
+    <ion-item button (click)="openModal_detail_vente(une_vente)" class=" rounded rounded-2">
       <ion-label>
         <!-- Ligne 1 : ID + Badge -->
         <div class="d-flex justify-content-between align-items-start">
           <h2 class="vente-id">Vente #{{ une_vente.id }}</h2>
-           <span class="badge py-2 px-3 rounded-2" [ngClass]="{
+          <span class="badge py-2 px-3 rounded-2" [ngClass]="{
               'bg-success-subtle text-success-emphasis':
                 une_vente.etat_vente?.id === 1,
               'bg-danger-subtle text-danger-emphasis':
