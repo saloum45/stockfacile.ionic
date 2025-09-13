@@ -18,7 +18,7 @@
     }
     <!-- Filtre par date début -->
     @if(filter.typeFiltre === 'autres'){
-    <div class="col-md-6 mt-2">
+    <div class="w-50 mt-2">
       <ion-input mode="md" label="Debut" label-placement="floating" fill="outline" [(ngModel)]="filter.date_debut"
         (change)="filtrer()" [max]="filter.date_fin || ''" class="bg-transparent"></ion-input>
     </div>
@@ -26,7 +26,7 @@
 
     <!-- Filtre par date fin -->
     @if(filter.typeFiltre === 'autres'){
-    <div class="col-md-6 mt-2">
+    <div class="w-50 mt-2">
       <ion-input mode="md" label="Fin" class="bg-transparent" label-placement="floating" fill="outline" [(ngModel)]="filter.date_fin" (change)="filtrer()"
         [min]="filter.date_debut || ''"></ion-input>
     </div>
