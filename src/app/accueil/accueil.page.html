@@ -2,18 +2,41 @@
   <ion-toolbar>
     <ion-title class="fw-bold" style="--color:var(--base-color)">Vue globale</ion-title>
   </ion-toolbar>
-  <!-- Filtre par période -->
-  @if(filter.typeFiltre === 'periode'){
-  <div class="col-md-8 px-3">
-    <select class="form-select" [(ngModel)]="filter.periode" (change)="filtrer()">
-      <option value="annuel">Annuel</option>
-      <option value="aujourd'hui">Aujourd'hui</option>
-      <option value="7jours">7 derniers jours</option>
-      <option value="15jours">15 derniers jours</option>
-      <option value="30jours">30 derniers jours</option>
-    </select>
+  <div class="row px-3">
+    <!-- Filtre par période -->
+    @if(filter.typeFiltre === 'periode'){
+    <div class="col-md-12">
+      <select class="form-select" [(ngModel)]="filter.periode" (change)="filtrer()">
+        <option value="annuel">Annuel</option>
+        <option value="aujourd'hui">Aujourd'hui</option>
+        <option value="7jours">7 derniers jours</option>
+        <option value="15jours">15 derniers jours</option>
+        <option value="30jours">30 derniers jours</option>
+        <option value="autres">Autres</option>
+      </select>
+    </div>
+    }
+    <!-- Filtre par date début -->
+    @if(filter.typeFiltre === 'autres'){
+    <div class="col-md-6 mt-2">
+      <ion-input mode="md" label="Debut" label-placement="floating" fill="outline" [(ngModel)]="filter.date_debut"
+        (change)="filtrer()" [max]="filter.date_fin || ''" class="bg-transparent"></ion-input>
+    </div>
+    }
+
+    <!-- Filtre par date fin -->
+    @if(filter.typeFiltre === 'autres'){
+    <div class="col-md-6 mt-2">
+      <ion-input mode="md" label="Fin" class="bg-transparent" label-placement="floating" fill="outline" [(ngModel)]="filter.date_fin" (change)="filtrer()"
+        [min]="filter.date_debut || ''"></ion-input>
+    </div>
+    }
+    @if(filter.typeFiltre === 'autres'){
+      <div class="text-center">
+        <ion-button style="--background: var(--base-color);" (click)="(filter.typeFiltre='periode');filter.periode='annuel';filtrer()"><i class="bi bi-arrow-left fs-2 icon-color"></i></ion-button>
+      </div>
+    }
   </div>
-  }
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">

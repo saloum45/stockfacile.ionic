@@ -17,11 +17,11 @@ import { TopProduitVendu } from '../components/dashboards/top-produit-vendu/top-
   templateUrl: './accueil.page.html',
   styleUrls: ['./accueil.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,EvolutionVenteAchat,Benefice,ModePaiement,VentesParHeure,AlertesStock,TopProduitVendu]
+  imports: [IonicModule, CommonModule, FormsModule, EvolutionVenteAchat, Benefice, ModePaiement, VentesParHeure, AlertesStock, TopProduitVendu]
 })
 export class AccueilPage implements OnInit {
 
-loading_get_dashboard = false;
+  loading_get_dashboard = false;
   dashboard: any;
   filter: any = {
     typeFiltre: 'periode', // ou 'dates'
@@ -57,7 +57,7 @@ loading_get_dashboard = false;
   get_dashboard() {
     Block.dots(".loading_bloc");
     this.loading_get_dashboard = true;
-    this.api.taf_post("entreprise/" + this.api.id_current_entreprise + "/dashboard",{date_debut:this.filter.date_debut,date_fin:this.filter.date_fin}, (reponse: any) => {
+    this.api.taf_post("entreprise/" + this.api.id_current_entreprise + "/dashboard", { date_debut: this.filter.date_debut, date_fin: this.filter.date_fin }, (reponse: any) => {
       if (reponse.status_code) {
         this.dashboard = reponse.data
         this.dashboard.stock_par_rangement = this.api.produit_grouped_by(this.dashboard.stock_par_rangement);
@@ -107,6 +107,9 @@ loading_get_dashboard = false;
           this.filter.date_debut = moment().subtract(29, 'days').startOf('day').format('YYYY-MM-DD');
           this.filter.date_fin = moment().endOf('day').format('YYYY-MM-DD');
           break;
+        case "autres":
+          this.filter.typeFiltre = "autres"
+          break;
       }
     }
     this.get_dashboard();
@@ -115,15 +118,15 @@ loading_get_dashboard = false;
 
   calcul_chiffrage() {
     this.chiffrage = {
-    total_approvisionnement: 0,
-    recette: 0,
-    dette: 0,
-    acompte: 0,
-    en_rupture: 0,
-    valorisation_stock: 0,
-    vente_anonyme: 0,
-    vente_client: 0
-  }
+      total_approvisionnement: 0,
+      recette: 0,
+      dette: 0,
+      acompte: 0,
+      en_rupture: 0,
+      valorisation_stock: 0,
+      vente_anonyme: 0,
+      vente_client: 0
+    }
     // chifrage
     this.dashboard.ventes.map((one_vente: any) => {
       let montant_total = 0, montant_recu = 0;
