@@ -18,7 +18,7 @@ export class ParametresPage implements OnInit {
   loading_get_entreprises = false;
   entreprises: any = [];
 
-  constructor(public api:ApiService) { }
+  constructor(public api: ApiService) { }
 
   ngOnInit() {
     this.get_entreprises();
@@ -52,5 +52,4 @@ export class ParametresPage implements OnInit {
       this.api.loading_current_entreprise = false;
     }, 500);
   }
-
 }
