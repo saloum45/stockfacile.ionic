@@ -96,7 +96,7 @@ export class VentesPage implements OnInit {
 
     const { data, role } = await modal.onWillDismiss();
 
-    if (data.status_code) {
+    if (data?.status_code) {
       // this.service.successMessage("Commande ajoutée");
       this.get_ventes()
     }
