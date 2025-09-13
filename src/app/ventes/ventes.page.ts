@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 import { AddVentesComponent } from '../components/components/ventes/add-ventes/add-ventes.component';
 // import { DetailVentesComponents } from '../components/components/ventes/detail-ventes-components/detail-ventes-components';
 import { EditVentesComponent } from '../components/components/ventes/edit-ventes/edit-ventes.component';
@@ -13,7 +13,7 @@ import { ModalController } from '@ionic/angular';
   templateUrl: './ventes.page.html',
   styleUrls: ['./ventes.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule,CommonModule, FormsModule]
 })
 export class VentesPage implements OnInit {
 
@@ -31,7 +31,7 @@ export class VentesPage implements OnInit {
   }
   filter = {
     typeFiltre: 'periode', // ou 'dates'
-    periode: "aujourd'hui",
+    periode: "30jours",
     dateDebut: '',
     dateFin: '',
     text: ''
