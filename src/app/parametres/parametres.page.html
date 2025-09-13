@@ -14,7 +14,7 @@
   <ion-row class="ion-padding-top ion-padding-bottom">
     <ion-col size="12">
       <!--Using items input-->
-      <ng-select [items]="cars" bindLabel="name" bindValue="id" [(ngModel)]="selectedCar">
+      <ng-select [items]="entreprises" bindLabel="nom_entreprise" bindValue="id" [(ngModel)]="api.id_current_entreprise" (change)="loading_entreprise()">
       </ng-select>
     </ion-col>
     <ion-col size="4" class="text-center">

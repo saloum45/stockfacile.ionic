@@ -5,27 +5,52 @@ import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { bagOutline } from 'ionicons/icons';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ApiService } from '../service/api/api.service';
 
 @Component({
   selector: 'app-parametres',
   templateUrl: './parametres.page.html',
   styleUrls: ['./parametres.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,NgSelectModule]
+  imports: [IonicModule, CommonModule, FormsModule, NgSelectModule]
 })
 export class ParametresPage implements OnInit {
-    selectedCar!: number;
+  loading_get_entreprises = false;
+  entreprises: any = [];
 
-    cars = [
-        { id: 1, name: 'Volvo' },
-        { id: 2, name: 'Saab' },
-        { id: 3, name: 'Opel' },
-        { id: 4, name: 'Audi' },
-    ];
-
-  constructor() {}
+  constructor(public api:ApiService) { }
 
   ngOnInit() {
+    this.get_entreprises();
+  }
+
+  get_entreprises() {
+    this.loading_get_entreprises = true;
+    this.api.taf_get("entreprises", (reponse: any) => {
+      if (reponse.status_code) {
+        this.entreprises = reponse.data
+        this.api.save_on_local_storage("entreprises", JSON.stringify(this.entreprises));
+        console.log("Opération effectuée avec succés sur la table entreprises. Réponse= ", reponse);
+      } else {
+        console.log("L'opération sur la table entreprises a échoué. Réponse= ", reponse);
+        this.api.Swal_error("L'opération a echoué")
+      }
+      this.loading_get_entreprises = false;
+    }, (error: any) => {
+      this.loading_get_entreprises = false;
+    })
+  }
+
+  loading_entreprise() {
+    this.api.id_current_privilege = this.entreprises.find((one: any) => one.id == this.api.id_current_entreprise).id_privilege
+    this.api.save_on_local_storage("id_current_entreprise", this.api.id_current_entreprise);
+    this.api.save_on_local_storage("id_current_privilege", this.api.id_current_privilege);
+    this.api.loading_current_entreprise = true;
+    setTimeout(() => {
+      this.api.id_current_entreprise = this.api.get_from_local_storage('id_current_entreprise');
+      this.api.id_current_privilege = this.api.get_from_local_storage('id_current_privilege');
+      this.api.loading_current_entreprise = false;
+    }, 500);
   }
 
 }
