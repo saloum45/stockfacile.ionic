@@ -1,0 +1,234 @@
+<div class="modal-header" data-bs-theme="ligth">
+  <h1 class="modal-title fs-5">Modifier ventes</h1>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="reactiveForm_edit_ventes" (ngSubmit)="onSubmit_edit_ventes()" #form_edit_ventes="ngForm"
+    class="p-3">
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-md-6">
+        <label class="form-label fw-semibold">Date <span class="text-danger">*</span></label>
+        <input type="date" class="form-control form-control-lg" formControlName="date"
+          [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
+        @if (submitted && f.date.errors?.required) {
+        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label fw-semibold">Client</label>
+        <ng-select class="form-control" formControlName="id_client"
+          [ngClass]="{ 'is-invalid': submitted && f.id_client.errors }" [items]="form_details?.clients"
+          bindLabel="nom_client" bindValue="id" placeholder="Sélectionner un client" [clearable]="true"
+          [searchable]="true" [loading]="loading_get_details_edit_ventes_form" notFoundText="Aucun client trouvé"
+          appendTo="body">
+        </ng-select>
+        @if (submitted && f.id_client.errors?.required) {
+        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-12">
+        <label class="form-label fw-semibold">Etat Vente <span class="text-danger">*</span></label>
+        <ng-select class="form-control" formControlName="id_etat_vente"
+          [ngClass]="{ 'is-invalid': submitted && f.id_etat_vente.errors }" [items]="form_details?.etat_ventes"
+          bindLabel="libelle_etat_vente" bindValue="id" placeholder="Sélectionner un etat" [clearable]="true"
+          [searchable]="true" [loading]="loading_get_details_edit_ventes_form" notFoundText="Aucun etat trouvé"
+          appendTo="body">
+        </ng-select>
+        @if (submitted && f.id_etat_vente.errors?.required) {
+        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
+        }
+      </div>
+    </div>
+
+    <h5 class="mt-4 mb-3 text-secondary d-flex align-items-center">
+      <i class="bi bi-cart-check me-2"></i>
+      Détails de la vente
+    </h5>
+
+    <div formArrayName="les_details" class="details-container">
+      @for (detail of les_details.controls; track $index; let i = $index) {
+      <div [formGroupName]="i" class="card mb-3 shadow-sm border-light animate__animated animate__fadeIn">
+        <button type="button" class="btn btn-close btn-close-danger position-absolute top-0 end-0 m-2"
+          (click)="remove_detail(i)" [disabled]="les_details.length === 1" aria-label="Supprimer ce produit"></button>
+
+        <div class="card-body p-3">
+          <div class="row g-2">
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Produit <span class="text-danger">*</span></label>
+              <ng-select class="form-control" formControlName="id_produit" (change)="on_produit_change(i)" [ngClass]="{
+                  'is-invalid': submitted && detail.get('id_produit')?.errors
+                }" [items]="get_produits()" bindLabel="info" bindValue="id" placeholder="Sélectionner un produit"
+                [clearable]="true" [searchable]="true" [loading]="loading_get_details_edit_ventes_form"
+                notFoundText="Aucun produit trouvé">
+              </ng-select>
+              @if (submitted && detail.get('id_produit')?.errors?.['required'])
+              {
+              <div class="invalid-feedback d-block">
+                Ce champ est obligatoire
+              </div>
+              }
+            </div>
+
+            @if (get_entrepot_by_product(i).length >= 1) {
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Entrepôt</label>
+              <ng-select class="form-control" [items]="get_entrepot_by_product(i)" bindLabel="info" bindValue="id"
+                [(ngModel)]="selectedEntrepots[i]" [ngModelOptions]="{ standalone: true }"
+                (change)="on_entrepot_change(i, $event)" [disabled]="!detail.get('id_produit')?.value"
+                placeholder="Sélectionner un entrepôt" [clearable]="true" [searchable]="true"
+                [loading]="loading_get_details_edit_ventes_form" notFoundText="Aucun entrepot trouvé" appendTo="body">
+              </ng-select>
+            </div>
+            }
+
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Rangement <span class="text-danger">*</span></label>
+              <ng-select class="form-control" formControlName="id_rangement"
+                [disabled]="!detail.get('id_produit')?.value" [ngClass]="{
+                  'is-invalid': submitted && detail.get('id_rangement')?.errors
+                }" [items]="get_rangements_disponibles(i)" bindLabel="info" bindValue="id"
+                placeholder="Sélectionner un entrepôt" [clearable]="true" [searchable]="true"
+                [loading]="loading_get_details_edit_ventes_form" notFoundText="Aucun rangement trouvé" appendTo="body">
+              </ng-select>
+              @if (submitted &&
+              detail.get('id_rangement')?.errors?.['required']) {
+              <div class="invalid-feedback d-block">
+                Ce champ est obligatoire
+              </div>
+              }
+            </div>
+
+            <!-- <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Quantité <span class="text-danger">*</span></label>
+              <input type="number" class="form-control" formControlName="quantite" placeholder="1"
+                (input)="verifier_stock(i)" [disabled]="!detail.get('id_rangement')?.value" [ngClass]="{
+                  'is-invalid': submitted && detail.get('quantite')?.errors
+                }" />
+              @if (submitted && detail.get('quantite')?.errors?.['required']) {
+              <div class="invalid-feedback d-block">
+                Ce champ est obligatoire
+              </div>
+              }
+              @if ((submitted && detail.get('quantite')?.errors?.['max'])||stockInsuffisant[i]) {
+              <div class="invalid-feedback d-block">
+                ⚠️ Stock insuffisant ! Max : {{ get_stock_max(i) }}
+              </div>
+              }
+            </div> -->
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Quantité <span class="text-danger">*</span></label>
+              <input type="number" class="form-control" formControlName="quantite" placeholder="1"
+                (input)="verifier_stock(i)" [disabled]="!detail.get('id_rangement')?.value" [ngClass]="{
+                  'is-invalid': submitted && detail.get('quantite')?.errors
+                }" />
+              @if (submitted && detail.get('quantite')?.errors?.['required']) {
+              <div class="invalid-feedback d-block">
+                Ce champ est obligatoire
+              </div>
+              }
+              @if ((submitted && detail.get('quantite')?.errors?.['max'])||stockInsuffisant[i]) {
+              <div class="invalid-feedback d-block">
+                ⚠️ Stock insuffisant ! Max : {{ get_stock_max(i) }}
+              </div>
+              }
+              <!-- @if (stockInsuffisant[i]) {
+              <div class="text-danger small mt-1">
+                ⚠️ Stock insuffisant ! Max : {{ get_stock_max(i) }}
+              </div>
+              } -->
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Prix unitaire <span class="text-danger">*</span></label>
+              <input type="number" class="form-control" formControlName="prix_unitaire" placeholder="0.00" step="0.01"
+                [ngClass]="{
+                  'is-invalid': submitted && detail.get('prix_unitaire')?.errors
+                }" />
+              @if (submitted &&
+              detail.get('prix_unitaire')?.errors?.['required']) {
+              <div class="invalid-feedback d-block">
+                Ce champ est obligatoire
+              </div>
+              }
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Total</label>
+              <input type="text" class="form-control bg-light" readonly [value]="
+                  (detail.get('quantite')?.value || 0) *
+                    (detail.get('prix_unitaire')?.value || 0)
+                    | currency : 'XOF' : '' : '1.0-2'
+                " />
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <div class="text-center my-3">
+        <button type="button" class="btn btn-outline-primary px-4 py-2" (click)="add_detail()">
+          <i class="bi bi-plus-circle me-1"></i>
+          Ajouter un produit
+        </button>
+      </div>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col-12 col-md-5">
+        <label class="form-label small fw-medium">Type de paiement <span class="text-danger">*</span></label>
+        <ng-select class="form-control" formControlName="id_mode_paiement" [items]="form_details.mode_paiements"
+          bindLabel="libelle_mode_paiement" bindValue="id" placeholder="Sélectionner un type de paiement"
+          [clearable]="true" [searchable]="true" [loading]="loading_get_details_edit_ventes_form" [ngClass]="{
+            'is-invalid': submitted && f.id_mode_paiement?.errors
+          }" appendTo="body">
+        </ng-select>
+        @if (submitted && f.id_mode_paiement?.errors?.['required']) {
+        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-7">
+        <label class="form-label small fw-medium">Montant verser <span class="text-danger">*</span></label>
+        <input type="number" class="form-control form-control-lg" formControlName="montant_verser" placeholder="0.00"
+          step="0.01" [max]=" calculer_total()" [ngClass]="{
+            'is-invalid': submitted && f.montant_verser?.errors
+          }" />
+        @if (submitted && f.montant_verser?.errors?.['required']) {
+        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
+        }
+        @if (submitted && f.montant_verser?.errors?.['max']) {
+        <div class="invalid-feedback d-block">
+          Le montant ne doit pas être supérieur à {{ calculer_total()| currency : "XOF" : "" : "1.0-2" }}
+        </div>
+        }
+      </div>
+    </div> -->
+
+    <div class="text-end mt-3">
+      <h6>
+        Total à payer :
+        <strong>{{
+          calculer_total() | currency : "XOF" : "" : "1.0-2"
+          }}</strong>
+      </h6>
+    </div>
+  </form>
+</div>
+<!-- Footer -->
+<div class="modal-footer border-0 pt-0">
+  <button type="button" class="btn btn-outline-secondary px-4" (click)="activeModal.dismiss()">
+    Annuler
+  </button>
+  <button type="button" class="btn btn-primary"
+    [disabled]="loading_edit_ventes||loading_get_details_edit_ventes_form||reactiveForm_edit_ventes.pristine"
+    (click)="form_edit_ventes.ngSubmit.emit()">
+    <span *ngIf="loading_edit_ventes">
+      <i class="bi bi-hourglass-split me-1"></i> Enregistrement...
+    </span>
+    <span *ngIf="!loading_edit_ventes">
+      <i class="bi bi-check-circle me-1"></i> Enregistrer
+    </span>
+  </button>
+</div>
