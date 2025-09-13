@@ -1,5 +1,7 @@
 {
   "name": "stockfacile.ionic",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular-standalone"
 }
