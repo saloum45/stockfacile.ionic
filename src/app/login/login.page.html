@@ -18,13 +18,13 @@
         </div>
       </div>
       <div class="text-end p-2">
-        <span >Mot de passe oublié?</span>
+        <span (click)="api.Swal_blue('Pas disponible pour le moment, Bientôt 💻')">Mot de passe oublié?</span>
       </div>
       <div class="text-center mb-5">
         <button class="btn btn-secondary w-75" [disabled]="loading_login_login"
         (click)="onSubmit_login_login()">{{loading_login_login ?"En cours ...":"Connexion"}}</button>
-        <p class="mt-2" >Vous n'avez pas de compte? <span class="badge border border-2 " style="color: var(--base-green);" routerLink="/register" >M'inscrire</span></p>
-        <p><span  class="badge border border-2 " style="color: var(--base-green);" >Contactez nous</span></p>
+        <p class="mt-2" >Vous n'avez pas de compte? <span class="badge border border-2 " style="color: var(--base-green);"  (click)="api.Swal_blue('Pas disponible pour le moment, Bientôt 💻')">M'inscrire</span></p>
+        <p><span  class="badge border border-2 " style="color: var(--base-green);"(click)="api.Swal_blue('Pas disponible pour le moment, Bientôt 💻')" >Contactez nous</span></p>
       </div>
     </form>
   </div>
