@@ -64,15 +64,7 @@ export class LoginPage implements OnInit {
 
         await this.api.update_data_from_token();
         this.api.Swal_success("Opération éffectuée avec succés")
-        // this.router.navigate(['/home'])
-        // 👉 Déclencher animation
-        const page = document.querySelector('.login-page');
-        page?.classList.add('zooming');
-
-        // 👉 Attendre fin anim puis naviguer
-        setTimeout(() => {
-          this.router.navigate(['tabs']);
-        }, 1000); // doit correspondre à la durée CSS
+        this.router.navigate(['tabs']);
       } else {
         console.log("L'opération sur la table login a échoué. Réponse= ", reponse);
         this.api.Swal_error("L'opération a echoué")
