@@ -21,7 +21,7 @@ export class ParametresPage implements OnInit {
   constructor(public api: ApiService) { }
 
   ngOnInit() {
-    this.get_entreprises();
+    // this.get_entreprises();
   }
 
   get_entreprises() {

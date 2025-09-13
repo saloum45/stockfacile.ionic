@@ -6,3 +6,12 @@ ion-tab-bar {
   --color-selected: var(--secondary-color);
   /* Change la couleur de l'onglet sélectionné */
 }
+
+.custom-tab-bar {
+  margin: 0 .40rem 1rem; // mx & my
+  border-radius: 16px;
+  background: #fff; // couleur de fond
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden; // pour que les coins soient bien découpés
+  padding-bottom: env(safe-area-inset-bottom); // pour iPhone X et +
+}
