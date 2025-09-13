@@ -5,13 +5,16 @@ import { IonicModule } from '@ionic/angular';
 import moment from 'moment';
 import { Block } from 'notiflix';
 import { ApiService } from '../service/api/api.service';
+import { EvolutionVenteAchat } from '../components/dashboards/evolution-vente-achat/evolution-vente-achat';
+import { Benefice } from '../components/dashboards/benefice/benefice';
+import { ModePaiement } from '../components/dashboards/mode-paiement/mode-paiement';
 
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.page.html',
   styleUrls: ['./accueil.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,EvolutionVenteAchat,Benefice,ModePaiement]
 })
 export class AccueilPage implements OnInit {
 
