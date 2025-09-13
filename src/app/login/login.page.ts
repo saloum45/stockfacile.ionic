@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api/api.service';
-import { SharedModuleModule } from '../shared-module/shared-module-module';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
