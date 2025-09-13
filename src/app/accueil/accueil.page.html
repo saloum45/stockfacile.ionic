@@ -5,5 +5,43 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-<div class="loading_bloc"></div>
+  <div class="loading_bloc"></div>
+  <ion-row class="ion-padding-top ion-padding-bottom">
+    <ion-col size="6" class="text-center">
+      <div class="card shadow-sm kpi-card border-0 rounded-3" style="background: #e8f9f0;">
+        <div class="card-body text-center">
+          <span class="text-muted"><i class="bi bi-cash-stack fs-2 text-success"></i> Ventes</span>
+          <p class=" text-success">{{ chiffrage.recette }} F CFA</p>
+        </div>
+      </div>
+    </ion-col>
+
+    <ion-col size="6" class="text-center">
+      <div class="card shadow-sm kpi-card border-0 rounded-3" style="background: #fdecea;">
+        <div class="card-body text-center">
+          <span class="text-muted"> <i class="bi bi-exclamation-triangle fs-2 text-danger"></i> En rupture</span>
+          <p class=" text-danger">{{ chiffrage.en_rupture }}</p>
+        </div>
+      </div>
+    </ion-col>
+
+    <ion-col size="6" class="text-center">
+      <div class="card shadow-sm kpi-card border-0 rounded-3" style="background: #e8f1fd;">
+        <div class="card-body text-center">
+          <span class="text-muted"><i class="bi bi-truck fs-2 text-primary"></i> Achats</span>
+          <p class=" text-primary">{{ chiffrage.total_approvisionnement }} F CFA
+          </p>
+        </div>
+      </div>
+    </ion-col>
+
+    <ion-col size="6" class="text-center">
+      <div class="card shadow-sm kpi-card border-0 rounded-3" style="background: #fff7e6;">
+        <div class="card-body text-center">
+          <span class="text-muted">  <i class="bi bi-wallet2 fs-2 text-warning"></i> Dette client</span>
+          <p class=" text-warning">{{ chiffrage.dette }} F CFA</p>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
 </ion-content>
