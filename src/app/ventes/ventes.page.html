@@ -15,7 +15,7 @@
         <!-- Ligne 1 : ID + Badge -->
         <div class="d-flex justify-content-between align-items-start">
           <h2 class="vente-id">Vente #{{ une_vente.id }}</h2>
-           <span class="badge py-2 px-3 rounded-pill" [ngClass]="{
+           <span class="badge py-2 px-3 rounded-2" [ngClass]="{
               'bg-success-subtle text-success-emphasis':
                 une_vente.etat_vente?.id === 1,
               'bg-danger-subtle text-danger-emphasis':
