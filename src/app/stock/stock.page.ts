@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonHeader,IonToolbar,IonTitle,IonList,IonCard,IonCardHeader,IonCardTitle,IonItem,IonLabel,IonSkeletonText,IonAccordion,IonAccordionGroup,IonCardContent } from '@ionic/angular/standalone';
+import { IonContent,IonHeader,IonToolbar,IonTitle,IonList,IonCard,IonCardHeader,IonCardTitle,IonItem,IonLabel,IonSkeletonText,IonAccordion,IonAccordionGroup,IonCardContent,IonBadge } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ApiService } from '../service/api/api.service';
   templateUrl: './stock.page.html',
   styleUrls: ['./stock.page.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule,IonContent,IonHeader,IonToolbar,IonTitle,IonList,IonCard,IonCardHeader,IonCardTitle,IonItem,IonLabel,IonSkeletonText,IonAccordion,IonAccordionGroup,IonCardContent]
+  imports: [ CommonModule, FormsModule,IonContent,IonHeader,IonToolbar,IonTitle,IonList,IonCard,IonCardHeader,IonCardTitle,IonItem,IonLabel,IonSkeletonText,IonAccordion,IonAccordionGroup,IonCardContent,IonBadge]
 })
 export class StockPage implements OnInit {
 

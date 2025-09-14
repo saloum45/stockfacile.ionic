@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" class="shadow-none">
+<ion-header [translucent]="true" class="shadow-none" mode="md">
   <ion-toolbar>
     <ion-title class="fw-bold" style="--color:var(--base-color)">Vue globale</ion-title>
   </ion-toolbar>
@@ -27,19 +27,26 @@
     <!-- Filtre par date fin -->
     @if(filter.typeFiltre === 'autres'){
     <div class="w-50 mt-2">
-      <ion-input mode="md" label="Fin" class="bg-transparent" label-placement="floating" fill="outline" [(ngModel)]="filter.date_fin" (change)="filtrer()"
-        [min]="filter.date_debut || ''"></ion-input>
+      <ion-input mode="md" label="Fin" class="bg-transparent" label-placement="floating" fill="outline"
+        [(ngModel)]="filter.date_fin" (change)="filtrer()" [min]="filter.date_debut || ''"></ion-input>
     </div>
     }
     @if(filter.typeFiltre === 'autres'){
-      <div class="text-center">
-        <ion-button style="--background: var(--base-color);" (click)="(filter.typeFiltre='periode');filter.periode='annuel';filtrer()"><i class="bi bi-arrow-left fs-2 icon-color"></i></ion-button>
-      </div>
+    <div class="text-center">
+      <ion-button style="--background: var(--base-color);"
+        (click)="(filter.typeFiltre='periode');filter.periode='annuel';filtrer()"><i
+          class="bi bi-arrow-left fs-2 icon-color"></i></ion-button>
+    </div>
     }
   </div>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense" mode="md">
+    <ion-toolbar>
+      <ion-title class="fw-bold" style="--color:var(--base-color)" size="large">Vue globale</ion-title>
+    </ion-toolbar>
+  </ion-header>
   <div class="loading_bloc"></div>
   <ion-row class=" ion-padding-bottom">
     <ion-col size="6" class="text-center">
