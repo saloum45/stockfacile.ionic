@@ -1,0 +1,141 @@
+<div class="modal-header" data-bs-theme="ligth">
+  <h1 class="modal-title fs-5">Ajouter produits</h1>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="reactiveForm_add_produits" (ngSubmit)="onSubmit_add_produits()" #form_add_produits="ngForm"
+    class="row">
+
+    <!-- Champ Libelle Produit -->
+    <div class="form-group col-sm-12">
+      <label>Libelle Produit <span class="text-danger">*</span> </label>
+      <input class="form-control" type="text" formControlName="libelle_produit" placeholder="Libelle Produit"
+        [ngClass]="{ 'is-invalid': submitted && f.libelle_produit.errors }" />
+      @if (submitted && f.libelle_produit.errors) {
+      <div class="invalid-feedback">
+        @if (f.libelle_produit.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Champ Prix Vente -->
+    <div class="form-group col-sm-6">
+      <label>Prix Vente <span class="text-danger">*</span> </label>
+      <input class="form-control" type="text" formControlName="prix_vente" placeholder="Prix Vente"
+        [ngClass]="{ 'is-invalid': submitted && f.prix_vente.errors }" />
+      @if (submitted && f.prix_vente.errors) {
+      <div class="invalid-feedback">
+        @if (f.prix_vente.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+     <!-- Champ Seuil Stock -->
+    <div class="form-group col-sm-6">
+      <label>Seuil Stock <span class="text-danger">*</span> </label>
+      <input class="form-control" type="text" formControlName="seuil_stock" placeholder="Seuil Stock"
+        [ngClass]="{ 'is-invalid': submitted && f.seuil_stock.errors }" />
+      @if (submitted && f.seuil_stock.errors) {
+      <div class="invalid-feedback">
+        @if (f.seuil_stock.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+ <!-- Champ Id Categorie (Clé étrangère vers categories) -->
+ <div class="form-group col-sm-6">
+  <label>Categories <span class="text-danger">*</span></label>
+  <ng-select [ngClass]="{ 'is-invalid': submitted && f.id_categorie.errors }" class=""
+    formControlName="id_categorie" [items]="form_details?.categories" bindLabel="nom_categorie" bindValue="id" [placeholder]="'Sélectionnez une catégories'" [loading]="loading_get_details_add_produits_form" notFoundText="Aucune catégorie trouvé" appendTo="body">
+  </ng-select>
+  @if (submitted && f.id_categorie.errors) {
+  <div class="invalid-feedback">
+    @if (f.id_categorie.errors.required) {
+    <div>Ce champ est obligatoire</div>
+    }
+  </div>
+  }
+</div>
+
+<!-- Champ Id Unite mesure (Clé étrangère vers Unite mesures) -->
+<div class="form-group col-sm-6">
+  <label>Unités Mesures <span class="text-danger">*</span></label>
+  <ng-select [ngClass]="{ 'is-invalid': submitted && f.id_unite_mesure.errors }" class=""
+    formControlName="id_unite_mesure" [items]="form_details?.unite_mesures" bindLabel="info" bindValue="id" [placeholder]="'Sélectionnez une catégories'" [loading]="loading_get_details_add_produits_form" notFoundText="Aucun unité trouvé" appendTo="body">
+
+  </ng-select>
+  @if (submitted && f.id_unite_mesure.errors) {
+  <div class="invalid-feedback">
+    @if (f.id_unite_mesure.errors.required) {
+    <div>Ce champ est obligatoire</div>
+    }
+  </div>
+  }
+</div>
+
+    <!-- Champ Prix Achat -->
+    <div class="form-group col-sm-12">
+      <label>Prix Achat</label>
+      <input class="form-control" type="text" formControlName="prix_achat" placeholder="Prix Achat"
+        [ngClass]="{ 'is-invalid': submitted && f.prix_achat.errors }" />
+      @if (submitted && f.prix_achat.errors) {
+      <div class="invalid-feedback">
+        @if (f.prix_achat.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+
+
+
+
+    <!-- Champ Id Entreprise (Clé étrangère vers entreprises) -->
+    <!-- <div class="form-group col-sm-6">
+      <label>Entreprises <span class="text-danger">*</span></label>
+      <select [ngClass]="{ 'is-invalid': submitted && f.id_entreprise.errors }" class="form-select"
+        formControlName="id_entreprise">
+        <option value="">Sélectionnez un(e) Entreprises</option>
+        @for (one_entreprises of form_details?.entreprises; track $index) {
+        <option [value]="one_entreprises.id">
+          {{ "N°" + one_entreprises.id }}
+        </option>
+        }
+      </select>
+      @if (submitted && f.id_entreprise.errors) {
+      <div class="invalid-feedback">
+        @if (f.id_entreprise.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div> -->
+
+
+  </form>
+</div>
+<!-- Footer -->
+<div class="modal-footer border-0 pt-0">
+  <button type="button" class="btn btn-outline-secondary px-4" (click)="activeModal.close()">
+    Annuler
+  </button>
+  <button type="button" class="btn btn-primary px-4" [disabled]="
+      loading_add_produits ||
+      loading_get_details_add_produits_form
+    " (click)="form_add_produits.ngSubmit.emit()">
+    <span *ngIf="loading_add_produits">
+      <i class="bi bi-hourglass-split me-1"></i> Enregistrement...
+    </span>
+    <span *ngIf="!loading_add_produits">
+      <i class="bi bi-check-circle me-1"></i> Enregistrer
+    </span>
+  </button>
+</div>
+

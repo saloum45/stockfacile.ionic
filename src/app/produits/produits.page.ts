@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,ModalController,IonList,IonItem,IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar,ModalController,IonList,IonItem,IonLabel,IonButton } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ApiService } from '../service/api/api.service';
   templateUrl: './produits.page.html',
   styleUrls: ['./produits.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonList,IonItem,IonLabel]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonList,IonItem,IonLabel,IonButton]
 })
 export class ProduitsPage implements OnInit {
 loading_get_produits = false
