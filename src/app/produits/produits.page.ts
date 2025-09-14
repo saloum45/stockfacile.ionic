@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar,ModalController,IonList,IonItem,IonLabel,IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonList, IonItem, IonLabel, IonButton } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
+import { AddProduitsComponent } from '../components/components/produits/add-produits/add-produits.component';
 
 @Component({
   selector: 'app-produits',
   templateUrl: './produits.page.html',
   styleUrls: ['./produits.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,IonList,IonItem,IonLabel,IonButton]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonLabel, IonButton]
 })
 export class ProduitsPage implements OnInit {
-loading_get_produits = false
+  loading_get_produits = false
   produits: any[] = []
   selected_produits: any = undefined
   produits_to_edit: any = undefined
@@ -77,22 +78,20 @@ loading_get_produits = false
         this.loading_delete_produits = false;
       })
   }
-  // openModal_add_produits() {
-  //   let options: any = {
-  //     centered: true,
-  //     scrollable: true,
-  //     size: "lg"//'sm' | 'lg' | 'xl' | string
-  //   }
-  //   const modalRef = this.modalService.open(AddProduitsComponent, { ...options, backdrop: 'static' })
-  //   modalRef.result.then((result: any) => {
-  //     console.log('Modal closed with:', result);
-  //     if (result?.status_code) {
-  //       this.get_produits()
-  //     } else {
+  async openModal_add_produits() {
+    const modal = await this.modalService.create({
+      component: AddProduitsComponent,
+    });
+    modal.present();
 
-  //     }
-  //   })
-  // }
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.service.successMessage("Commande ajoutée");
+      this.get_produits()
+    }
+  }
+
   // openModal_edit_produits(one_produits: any) {
   //   let options: any = {
   //     centered: true,

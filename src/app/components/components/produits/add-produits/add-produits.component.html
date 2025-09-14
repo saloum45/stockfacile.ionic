@@ -1,7 +1,16 @@
-<div class="modal-header" data-bs-theme="ligth">
-  <h1 class="modal-title fs-5">Ajouter produits</h1>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
-</div>
+<ion-header [translucent]="true" class="shadow-none">
+  <ion-toolbar>
+    <ion-chip (click)="activeModal.dismiss()">
+      <i class="bi bi-x-circle me-1"></i>
+      <ion-label>Fermer</ion-label>
+    </ion-chip>
+    <ion-chip slot="end" class="validate-button" [disabled]="loading_add_produits" (click)="form_add_produits.ngSubmit.emit()">
+      <ion-label>Valider</ion-label>
+      <i class="bi bi-check2-circle ms-1"></i>
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
 <div class="modal-body">
   <form [formGroup]="reactiveForm_add_produits" (ngSubmit)="onSubmit_add_produits()" #form_add_produits="ngForm"
     class="row">
@@ -121,21 +130,4 @@
 
   </form>
 </div>
-<!-- Footer -->
-<div class="modal-footer border-0 pt-0">
-  <button type="button" class="btn btn-outline-secondary px-4" (click)="activeModal.close()">
-    Annuler
-  </button>
-  <button type="button" class="btn btn-primary px-4" [disabled]="
-      loading_add_produits ||
-      loading_get_details_add_produits_form
-    " (click)="form_add_produits.ngSubmit.emit()">
-    <span *ngIf="loading_add_produits">
-      <i class="bi bi-hourglass-split me-1"></i> Enregistrement...
-    </span>
-    <span *ngIf="!loading_add_produits">
-      <i class="bi bi-check-circle me-1"></i> Enregistrer
-    </span>
-  </button>
-</div>
-
+</ion-content>

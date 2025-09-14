@@ -1,14 +1,14 @@
 
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from '../../../service/api/api.service';
+import { ApiService } from '../../../../service/api/api.service';
 import { CommonModule } from '@angular/common';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ModalController,IonContent,IonHeader,IonChip,IonToolbar,IonLabel } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-add-produits',
   standalone: true, // Composant autonome
-  imports: [CommonModule, ReactiveFormsModule, NgSelectModule], // Dépendances importées
+  imports: [CommonModule, ReactiveFormsModule, NgSelectModule,IonContent,IonHeader,IonChip,IonToolbar,IonLabel], // Dépendances importées
   templateUrl: './add-produits.component.html',
   styleUrls: ['./add-produits.component.scss']
 })
@@ -18,7 +18,7 @@ export class AddProduitsComponent {
   loading_add_produits: boolean = false
   form_details: any = {}
   loading_get_details_add_produits_form = false
-  constructor(private formBuilder: FormBuilder, public api: ApiService, public activeModal: NgbActiveModal) { }
+  constructor(private formBuilder: FormBuilder, public api: ApiService, public activeModal: ModalController) { }
 
   ngOnInit(): void {
     this.get_details_add_produits_form()
@@ -62,7 +62,7 @@ export class AddProduitsComponent {
         console.log("Opération effectuée avec succés sur la table produits. Réponse= ", reponse);
         this.onReset_add_produits()
         this.api.Swal_success("Opération éffectuée avec succés")
-        this.activeModal.close(reponse)
+        this.activeModal.dismiss(reponse)
       } else {
         console.log("L'opération sur la table produits a échoué. Réponse= ", reponse);
         this.api.Swal_error("L'opération a echoué")
