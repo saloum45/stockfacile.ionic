@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api/api.service';
-import { IonicModule } from '@ionic/angular';
+import { IonContent,IonInput,IonInputPasswordToggle,IonButton } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule,IonicModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule,ReactiveFormsModule,IonContent,IonInput,IonInputPasswordToggle,IonButton],
 })
 export class LoginPage implements OnInit {
 
