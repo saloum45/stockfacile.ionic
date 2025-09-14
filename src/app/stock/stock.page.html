@@ -43,9 +43,10 @@
       <ion-card *ngFor="let one_stock of list" class="shadow-none border border-2 px-0 mx-0">
         <!-- Produit -->
         <ion-card-header class="bg-light">
-          <ion-card-title class="text-muted ">
+          <!-- <ion-card-title class="text-muted ">
             {{ one_stock.libelle_produit }}
-          </ion-card-title>
+          </ion-card-title> -->
+          <ion-label>{{ one_stock.libelle_produit }}</ion-label>
           <!-- <ion-label>{{ one_stock.libelle_produit }}</ion-label> -->
           <ion-badge [ngClass]="[one_stock.bg_couleur,one_stock.couleur]" class="fs-6 mt-1">
             {{ one_stock.quantite_total }}
