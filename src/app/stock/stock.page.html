@@ -6,12 +6,12 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- Valorisation -->
-  <div class="bg-white rounded-2 mb-4 p-3 shadow-sm d-flex flex-column justify-content-between align-items-center">
+  <div class="bg-white rounded-2 mb-4 p-2 shadow-sm d-flex flex-column justify-content-between align-items-center">
     <div class="d-flex align-items-center">
       <i class="bi bi-box-seam me-2 text-primary-base" style="font-size: 1.5rem;"></i>
       <span class="fw-bold text-primary-base">Valorisation du Stock</span>
     </div>
-    <span class="badge bg-success-subtle text-success-emphasis fs-5 px-3 py-2 ">{{valeur_stock| number : "1.0-0" :
+    <span class="badge bg-success-subtle text-success-emphasis fs-5  ">{{valeur_stock| number : "1.0-0" :
       "fr-FR"}} F CFA</span>
   </div>
 
@@ -39,8 +39,8 @@
   </ng-container>
 
  <ng-container *ngIf="!loading_get_stock; else skeleton">
-    <ion-list>
-      <ion-card *ngFor="let one_stock of list" class="shadow-none border border-2">
+    <ion-list class="px-0 mx-0">
+      <ion-card *ngFor="let one_stock of list" class="shadow-none border border-2 px-0 mx-0">
         <!-- Produit -->
         <ion-card-header class="bg-light">
           <ion-card-title class="text-muted ">
