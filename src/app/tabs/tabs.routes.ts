@@ -31,6 +31,11 @@ export const routes: Routes = [
         redirectTo: '/tabs/accueil',
         pathMatch: 'full',
       },
+      {
+        path: 'produits',
+        loadComponent: () =>
+          import('../produits/produits.page').then((m) => m.ProduitsPage),
+      },
     ],
   },
   {

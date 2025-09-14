@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { addIcons } from 'ionicons';
-import { bagOutline } from 'ionicons/icons';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ApiService } from '../service/api/api.service';
 import { IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonCol,IonCard,IonCardContent,IonRow } from '@ionic/angular/standalone';
+import { IonicModule } from "@ionic/angular";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-parametres',
   templateUrl: './parametres.page.html',
   styleUrls: ['./parametres.page.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule, NgSelectModule, IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonCol,IonCard,IonCardContent,IonRow]
+  imports: [CommonModule, FormsModule, NgSelectModule, IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonCol, IonCard, IonCardContent, IonRow,RouterLink]
 })
 export class ParametresPage implements OnInit {
   loading_get_entreprises = false;
