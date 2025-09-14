@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import moment from 'moment';
 import { Block } from 'notiflix';
 import { ApiService } from '../service/api/api.service';
@@ -11,13 +10,13 @@ import { ModePaiement } from '../components/dashboards/mode-paiement/mode-paieme
 import { VentesParHeure } from '../components/dashboards/ventes-par-heure/ventes-par-heure';
 import { AlertesStock } from '../components/dashboards/alertes-stock/alertes-stock';
 import { TopProduitVendu } from '../components/dashboards/top-produit-vendu/top-produit-vendu';
-
+import { IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonCol,IonRow,IonInput } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.page.html',
   styleUrls: ['./accueil.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, EvolutionVenteAchat, Benefice, ModePaiement, VentesParHeure, AlertesStock, TopProduitVendu]
+  imports: [ CommonModule, FormsModule, EvolutionVenteAchat, Benefice, ModePaiement, VentesParHeure, AlertesStock, TopProduitVendu, IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonCol,IonRow,IonInput ]
 })
 export class AccueilPage implements OnInit {
 
