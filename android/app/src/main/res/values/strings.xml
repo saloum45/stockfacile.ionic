@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Stock Facile</string>
+    <string name="title_activity_main">Stock Facile</string>
+    <string name="package_name">chitaritech.stockfacile.com</string>
+    <string name="custom_url_scheme">chitaritech.stockfacile.com</string>
+</resources>
