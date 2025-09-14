@@ -5,9 +5,7 @@ ion-tab-bar {
   /* Change la couleur du texte ici */
   --color-selected: var(--secondary-color);
   /* Change la couleur de l'onglet sélectionné */
-}
 
-.custom-tab-bar {
   margin: 0 .40rem 1rem; // mx & my
   border-radius: 16px;
   background: #fff; // couleur de fond
