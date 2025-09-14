@@ -8,7 +8,7 @@ const config: CapacitorConfig = {
     SplashScreen: {
       launchShowDuration: 1000, // Durée d'affichage (1 seconde)
       backgroundColor: "#ffffffff", // Couleur de fond : blanc
-      androidScaleType: "CENTER", // Ajuste l'image au centre en conservant les proportions
+      androidScaleType: "CENTER_CROP", // Ajuste l'image au centre en conservant les proportions
       showSpinner: false, // Désactive le spinner pour un affichage plus propre
       splashFullScreen: true, // Active le mode plein écran
       splashImmersive: true, // Supprime la barre de navigation/status pendant le splash
