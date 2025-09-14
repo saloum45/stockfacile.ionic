@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonList, IonItem, IonLabel, IonButton } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
 import { AddProduitsComponent } from '../components/components/produits/add-produits/add-produits.component';
+import { EditProduitsComponent } from '../components/components/produits/edit-produits/edit-produits.component';
 
 @Component({
   selector: 'app-produits',
@@ -92,23 +93,22 @@ export class ProduitsPage implements OnInit {
     }
   }
 
-  // openModal_edit_produits(one_produits: any) {
-  //   let options: any = {
-  //     centered: true,
-  //     scrollable: true,
-  //     size: "lg"//'sm' | 'lg' | 'xl' | string
-  //   }
-  //   const modalRef = this.modalService.open(EditProduitsComponent, { ...options, backdrop: 'static', })
-  //   modalRef.componentInstance.produits_to_edit = one_produits;
-  //   modalRef.result.then((result: any) => {
-  //     console.log('Modal closed with:', result);
-  //     if (result?.status_code) {
-  //       this.get_produits()
-  //     } else {
+  async openModal_edit_produits(one_produits: any) {
+    const modal = await this.modalService.create({
+      component: EditProduitsComponent,
+      componentProps: {
+        produits_to_edit: one_produits
+      }
+    });
+    modal.present();
 
-  //     }
-  //   })
-  // }
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.service.successMessage("Commande ajoutée");
+      this.get_produits();
+    }
+  }
 
   // Méthode pour filtrer les approvisionnements
   filtrer() {
