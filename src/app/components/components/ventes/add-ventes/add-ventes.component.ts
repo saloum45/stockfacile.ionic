@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormArray, FormsModule } from '@angular/forms';
 import { ApiService } from '../../../../service/api/api.service';
 import { CommonModule } from '@angular/common';
-import { ModalController,IonicModule } from '@ionic/angular';
+import { IonContent,IonHeader,IonToolbar,IonLabel,ModalController,IonChip } from '@ionic/angular/standalone';
 import { NgSelectModule } from "@ng-select/ng-select";
 @Component({
   selector: 'app-add-ventes',
   standalone: true, // Composant autonome
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgSelectModule,IonicModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgSelectModule, IonContent,IonHeader,IonToolbar,IonLabel,IonChip],
   templateUrl: './add-ventes.component.html',
   styleUrls: ['./add-ventes.component.scss']
 })

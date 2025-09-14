@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonList,IonItem,IonLabel } from '@ionic/angular/standalone';
+import { IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonList,IonItem,IonLabel,ModalController } from '@ionic/angular/standalone';
 import { AddVentesComponent } from '../components/components/ventes/add-ventes/add-ventes.component';
 // import { DetailVentesComponents } from '../components/components/ventes/detail-ventes-components/detail-ventes-components';
 import { EditVentesComponent } from '../components/components/ventes/edit-ventes/edit-ventes.component';
 import { ApiService } from '../service/api/api.service';
-import { ModalController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-ventes',
