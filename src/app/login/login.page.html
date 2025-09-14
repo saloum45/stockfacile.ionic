@@ -17,8 +17,8 @@
             [label]="submitted&& f.password.errors?'Le mot de passe est obligatoire':'Mot de passe'"
             label-placement="floating" fill="outline" placeholder="Enter text" class="mt-3" formControlName="password"
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
-          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </div>
       </div>
       <div class="text-end p-2">
