@@ -36,43 +36,52 @@
   @if (!loading_get_produits && list.length > 0) {
   <ion-list class="bg-transparent mt-2">
     @for (one_produit of list; track one_produit) {
-    <ion-item class=" rounded rounded-2 mb-2">
-      <ion-label>
-        <!-- Ligne 1 : ID + Badge -->
-        <div class="d-flex justify-content-between align-items-start">
-          <h2 class="vente-id">{{ one_produit.libelle_produit }}</h2>
-          <span class="badge py-2 px-3 rounded-2" [ngClass]="{
+    <ion-item-sliding>
+      <ion-item class=" rounded rounded-2 mb-2">
+        <ion-label>
+          <!-- Ligne 1 : ID + Badge -->
+          <div class="d-flex justify-content-between align-items-start">
+            <h2 class="vente-id">{{ one_produit.libelle_produit }}</h2>
+            <span class="badge py-2 px-3 rounded-2" [ngClass]="{
               'bg-success-subtle text-success-emphasis':
                 one_produit.etat_vente?.id === 1,
               'bg-danger-subtle text-danger-emphasis':
                 one_produit.etat_vente?.id === 2
             }">
-            {{ one_produit.etat_vente?.libelle_etat_vente || "En attente" }}
-          </span>
-        </div>
+              {{ one_produit.etat_vente?.libelle_etat_vente || "En attente" }}
+            </span>
+          </div>
 
 
-        <!-- Ligne 2  -->
-        <p class="vente-client">
-          <i class="bi bi-tags-fill"></i>
-          {{one_produit.categorie.nom_categorie}}
-        </p>
-
-        <div class="d-flex justify-content-between align-items-center">
-
-          <!-- Ligne 3 :  -->
-          <p class="vente-date">
-            <i class="bi bi-unity"></i>
-            {{one_produit.unite_mesure.symbole}}
+          <!-- Ligne 2  -->
+          <p class="vente-client">
+            <i class="bi bi-tags-fill"></i>
+            {{one_produit.categorie.nom_categorie}}
           </p>
 
-          <!-- Ligne 4 :  -->
-          <p class="vente-total badge bg-success-subtle text-success-emphasis">
-            <i class="bi bi-coin"></i> {{one_produit.prix_vente}} FCFA
-          </p>
-        </div>
-      </ion-label>
-    </ion-item>
+          <div class="d-flex justify-content-between align-items-center">
+
+            <!-- Ligne 3 :  -->
+            <p class="vente-date">
+              <i class="bi bi-unity"></i>
+              {{one_produit.unite_mesure.symbole}}
+            </p>
+
+            <!-- Ligne 4 :  -->
+            <p class="vente-total badge bg-success-subtle text-success-emphasis">
+              <i class="bi bi-coin"></i> {{one_produit.prix_vente}} FCFA
+            </p>
+          </div>
+        </ion-label>
+      </ion-item>
+      <ion-item-options class="bg-transparent">
+        <ion-item-option class="bg-transparent text-danger">
+          <ion-button fill="outline" color="medium" (click)="openModal_edit_produits(one_produit)">
+            <i class="bi bi-pencil-square"></i>
+          </ion-button>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
     }
   </ion-list>
 
