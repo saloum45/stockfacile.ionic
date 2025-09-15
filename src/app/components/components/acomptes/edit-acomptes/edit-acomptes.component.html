@@ -1,0 +1,52 @@
+<ion-header [translucent]="true" class="shadow-none">
+  <ion-toolbar>
+    <ion-chip (click)="activeModal.dismiss()">
+      <i class="bi bi-x-circle me-1"></i>
+      <ion-label>Fermer</ion-label>
+    </ion-chip>
+    <ion-chip slot="end" class="validate-button" [disabled]="loading_edit_acomptes ||
+      loading_get_details_edit_acomptes_form ||reactiveForm_edit_acomptes.pristine"
+      (click)="form_edit_acomptes.ngSubmit.emit()">
+      <ion-label>Valider</ion-label>
+      <i class="bi bi-check2-circle ms-1"></i>
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="reactiveForm_edit_acomptes" (ngSubmit)="onSubmit_edit_acomptes()" #form_edit_acomptes="ngForm"
+    class="row">
+    <!-- Champ Id Mode Paiement (Clé étrangère vers mode_paiements) -->
+    <div class="col-12 col-md-7">
+      <label class="form-label small fw-medium">Type de paiement <span class="text-danger">*</span></label>
+      <ng-select class="form-control" formControlName="id_mode_paiement" [items]="form_details.modePaiements"
+        bindLabel="libelle_mode_paiement" bindValue="id" placeholder="Sélectionner un type de paiement"
+        [clearable]="true" [searchable]="true" [loading]="loading_get_details_edit_acomptes_form" [ngClass]="{
+          'is-invalid': submitted && f.id_mode_paiement?.errors
+        }" appendTo="body">
+      </ng-select>
+      @if (submitted && f.id_mode_paiement?.errors?.['required']) {
+      <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
+      }
+    </div>
+
+    <!-- Champ Montant -->
+    <div class="form-group col-sm-5">
+      <label class="form-label small fw-medium">Montant <span class="text-danger">*</span></label>
+      <input class="form-control form-select-lg" type="text" formControlName="montant" placeholder="Montant"
+        [ngClass]="{ 'is-invalid': submitted && f.montant.errors }" />
+      @if (submitted && f.montant.errors) {
+      <div class="invalid-feedback">
+        @if (f.montant.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      <div class="invalid-feedback">
+        @if (f.montant.errors.max) {
+        <div>L'acompte ne peut être plus élévé que le montant dû :
+          {{((this.selected_vente.reste_a_payer)+acomptes_to_edit.montant)}} F CFA</div>
+        }
+      </div>
+      }
+    </div>
+  </form>
+</ion-content>

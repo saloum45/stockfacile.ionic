@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalController, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
 import { AddAcomptesComponent } from '../components/components/acomptes/add-acomptes/add-acomptes.component';
+import { EditAcomptesComponent } from '../components/components/acomptes/edit-acomptes/edit-acomptes.component';
 
 @Component({
   selector: 'app-acomptes',
@@ -109,7 +110,7 @@ export class AcomptesPage implements OnInit {
   async openModal_add_acomptes() {
     const modal = await this.modalService.create({
       component: AddAcomptesComponent,
-        componentProps: {
+      componentProps: {
         selected_vente: this.seletected_vente
       }
     });
@@ -122,23 +123,22 @@ export class AcomptesPage implements OnInit {
       this.get_acomptes()
     }
   }
-  openModal_edit_acomptes(one_acomptes: any) {
-    // let options: any = {
-    //   centered: true,
-    //   scrollable: true,
-    //   size: "lg"//'sm' | 'lg' | 'xl' | string
-    // }
-    // const modalRef = this.modalService.open(EditAcomptesComponent, { ...options, backdrop: 'static', })
-    // modalRef.componentInstance.acomptes_to_edit = one_acomptes;
-    // modalRef.componentInstance.selected_vente = this.seletected_vente;
-    // modalRef.result.then((result: any) => {
-    //   console.log('Modal closed with:', result);
-    //   if (result?.status_code) {
-    //     this.get_acomptes()
-    //   } else {
+  async openModal_edit_acomptes(one_acomptes: any) {
+    const modal = await this.modalService.create({
+      component: EditAcomptesComponent,
+      componentProps: {
+        acomptes_to_edit: one_acomptes,
+        selected_vente: this.seletected_vente
+      }
+    });
+    modal.present();
 
-    //   }
-    // })
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.service.successMessage("Commande ajoutée");
+      this.get_acomptes()
+    }
   }
 
 }
