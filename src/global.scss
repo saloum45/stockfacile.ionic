@@ -47,6 +47,10 @@
   --base-color: #233C6C;
   --secondary-base-color: #4CF4F5;
 
+  /* src/global.scss ou styles.scss */
+  ion-content {
+    --background: #f9f9f9;
+  }
 
   --primary-color: #233C6C;
   /* Couleur principale : vert */
@@ -154,7 +158,7 @@ label {
 
 
 // validate. button
-.validate-button{
+.validate-button {
   background-color: var(--base-color);
   color: white !important;
   height: 50px;
