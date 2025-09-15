@@ -10,11 +10,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
   margin: 16px 0;
   text-align: center;
-
-  .vente-id {
-    font-weight: 700;
-    color: var(--ion-color-primary);
-  }
   .vente-date,
   .vente-client {
     font-size: 14px;
@@ -22,16 +17,7 @@
     margin: 4px 0;
   }
 
-  .status-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
 
-    .total {
-      font-size: 16px;
-    }
-  }
 }
 
 .produit-list {

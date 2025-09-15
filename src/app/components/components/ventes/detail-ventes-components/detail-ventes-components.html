@@ -14,7 +14,7 @@
 
   <!-- Section entête -->
   <div class="header-card">
-    <h2 class="vente-id">Vente #{{ ventes_to_view?.id }}</h2>
+    <h2 class="text-primary-base fw-bold">Vente #{{ ventes_to_view?.id }}</h2>
     <p class="vente-date">
       <i class="bi bi-calendar-event me-1"></i>
       {{ ventes_to_view?.date | date:'d MMMM yyyy' }} à {{ ventes_to_view?.created_at | date:'HH:mm' }}
@@ -24,16 +24,14 @@
       {{ ventes_to_view?.client?.nom_client || 'Client inconnu' }}
     </p>
 
-    <div class="status-total">
-      <ion-badge [color]="ventes_to_view?.etat_vente?.id === 1 ? 'success' : 'danger'">
+    <div class="d-flex justify-content-between align-items-center">
+      <ion-badge
+        [ngClass]="ventes_to_view?.etat_vente?.id === 1 ? 'text-success-emphasis bg-success-subtle' : 'text-danger-emphasis bg-danger-subtle'">
         {{ ventes_to_view?.etat_vente?.libelle_etat_vente || 'En attente' }}
       </ion-badge>
-      <div class="total">
-        <strong>Total :</strong>
-        <span class="text-success fw-bold">
-          {{ getTotal(ventes_to_view?.detail_ventes) | number:'':'fr' }} FCFA
-        </span>
-      </div>
+      <ion-badge class="text-success-emphasis bg-success-subtle">
+        {{ getTotal(ventes_to_view?.detail_ventes) | number:'':'fr' }} FCFA
+      </ion-badge>
     </div>
   </div>
 
