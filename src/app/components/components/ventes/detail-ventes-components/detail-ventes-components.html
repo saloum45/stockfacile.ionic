@@ -13,7 +13,7 @@
 <ion-content [fullscreen]="true" class="vente-detail-content ion-padding">
 
   <!-- Section entête -->
-  <div class="header-card">
+  <div class="header-card bg-white rounded rounded-4 p-2 text-center">
     <h2 class="text-primary-base fw-bold">Vente #{{ ventes_to_view?.id }}</h2>
     <p class="vente-date">
       <i class="bi bi-calendar-event me-1"></i>
@@ -36,35 +36,35 @@
   </div>
 
   <!-- Liste des produits -->
-  <ion-list class="produit-list">
+  <ion-list class="rounded rounded-3 bg-transparent">
     <ion-list-header lines="none">
       <h3>Produits</h3>
     </ion-list-header>
 
     <ng-container *ngIf="ventes_to_view?.detail_ventes?.length;">
       @for (detail of ventes_to_view.detail_ventes; track $index) {
-      <ion-item class="produit-item">
+      <ion-item class="header-card bg-white rounded rounded-4 mb-2">
         <ion-label class="ion-text-wrap">
-          <h4>{{ detail.produit?.libelle_produit || 'Produit inconnu' }}</h4>
+          <h4 class="fw-bold">{{ detail.produit?.libelle_produit || 'Produit inconnu' }}</h4>
           <p>Quantité : <strong>{{ detail.quantite }}</strong></p>
           <p>Prix unitaire : {{ detail.prix_unitaire | number:'':'fr' }} FCFA</p>
           <p>Entrepôt : {{ detail.rangement?.entrepot?.libelle_entrepot || 'N/A' }}</p>
           <p>Rangement : {{ detail.rangement?.libelle_rangement || '-' }}</p>
         </ion-label>
-        <div slot="end" class="sous-total">
+        <ion-badge class="text-success-emphasis bg-success-subtle">
           {{ (detail.quantite * detail.prix_unitaire) | number:'':'fr' }} FCFA
-        </div>
+        </ion-badge>
       </ion-item>
       }
     </ng-container>
   </ion-list>
 
   <!-- Boutons d'action -->
-  <div class="actions">
-    <ion-button fill="solid" color="primary">
+  <div class="d-flex justify-content-between w-75 m-auto">
+    <ion-button fill="outline" color="medium">
       <i class="bi bi-file-earmark-text me-1"></i> Facture
     </ion-button>
-    <ion-button fill="outline" color="success">
+    <ion-button fill="outline" color="medium">
       <i class="bi bi-printer me-1"></i> Ticket
     </ion-button>
   </div>
