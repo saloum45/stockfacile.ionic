@@ -13,7 +13,7 @@
 <!-- Historique des acomptes -->
 <ion-list class=" bg-transparent">
   <!-- Somme totale des approvisionnements -->
-  <div class="d-flex justify-content-between rounded mb-2 ">
+  <div class="d-flex justify-content-between rounded my-2 ">
     <ion-badge class="badge bg-danger-subtle text-danger-emphasis w-auto">Reste : {{chiffrage.reste_a_payer| number :
       "1.0-0" : "fr-FR"}} FCFA</ion-badge>
     <ion-badge class="badge bg-success-subtle text-success-emphasis w-auto">Reçu : {{chiffrage.montant_recu| number :
@@ -26,7 +26,7 @@
       (click)="openModal_add_acomptes()"><i class="bi bi-plus-square-dotted"></i></ion-button>
   </div>
   @for (one_acompte of acomptes; track one_acompte) {
-  <ion-item class=" rounded rounded-2 mb-2">
+  <ion-item class=" rounded rounded-3 mb-2">
     <ion-label>
       <!-- Ligne 1 : ID + Badge -->
       <div class="d-flex justify-content-between align-items-start">
@@ -48,7 +48,7 @@
       </p>
 
       <!-- Ligne 4 : Total -->
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between align-items-center">
         <p class="vente-total badge bg-success-subtle text-success-emphasis">
           {{ one_acompte.montant | number:'':'fr' }} FCFA
         </p>
