@@ -1,19 +1,20 @@
 import { Component, Input, OnInit, output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {  ModalController, IonList, IonItem, IonLabel, IonButton,IonBadge,IonItemSliding ,IonItemOption,IonItemOptions} from '@ionic/angular/standalone';
+import { ModalController, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
+import { AddAcomptesComponent } from '../components/components/acomptes/add-acomptes/add-acomptes.component';
 
 @Component({
   selector: 'app-acomptes',
   templateUrl: './acomptes.page.html',
   styleUrls: ['./acomptes.page.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule, IonList, IonItem, IonLabel, IonButton,IonBadge,IonItemSliding,IonItemOption,IonItemOptions]
+  imports: [CommonModule, FormsModule, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions]
 })
 export class AcomptesPage implements OnInit {
 
- loading_get_acomptes = false
+  loading_get_acomptes = false
   acomptes: any[] = []
   selected_acomptes: any = undefined
   acomptes_to_edit: any = undefined
@@ -105,28 +106,21 @@ export class AcomptesPage implements OnInit {
         this.loading_delete_acomptes = false;
       })
   }
-  openModal_add_acomptes() {
-    // if (this.chiffrage.total_vente == this.chiffrage.montant_recu) {
-    //   this.api.Swal_info("Cette vente a entièrement été payée");
-    //   return
-    // }
-    // let options: any = {
-    //   centered: true,
-    //   scrollable: true,
-    //   size: "lg"//'sm' | 'lg' | 'xl' | string
-    // }
-    // const modalRef = this.modalService.open(AddAcomptesComponent, { ...options, backdrop: 'static' })
-    // modalRef.componentInstance.selected_vente = this.seletected_vente;
-    // modalRef.result.then((result: any) => {
-    //   console.log('Modal closed with:', result);
-    //   if (result?.status_code) {
-    //     // this.seletected_vente.montant_acompte_ajouter = result?.data?.montant
-    //     this.notifier_list.emit(result?.data);
-    //     this.get_acomptes()
-    //   } else {
+  async openModal_add_acomptes() {
+    const modal = await this.modalService.create({
+      component: AddAcomptesComponent,
+        componentProps: {
+        selected_vente: this.seletected_vente
+      }
+    });
+    modal.present();
 
-    //   }
-    // })
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.service.successMessage("Commande ajoutée");
+      this.get_acomptes()
+    }
   }
   openModal_edit_acomptes(one_acomptes: any) {
     // let options: any = {
