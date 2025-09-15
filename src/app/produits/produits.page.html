@@ -34,7 +34,7 @@
 
   <!-- Liste des ventes -->
   @if (!loading_get_produits && list.length > 0) {
-  <ion-list class="bg-transparent ">
+  <ion-list class="bg-transparent mt-2">
     @for (one_produit of list; track one_produit) {
     <ion-item class=" rounded rounded-2 mb-2">
       <ion-label>
@@ -58,16 +58,19 @@
           {{one_produit.categorie.nom_categorie}}
         </p>
 
-        <!-- Ligne 3 :  -->
-        <p class="vente-date">
-          <i class="bi bi-unity"></i>
-          {{one_produit.unite_mesure.symbole}}
-        </p>
+        <div class="d-flex justify-content-between align-items-center">
 
-        <!-- Ligne 4 :  -->
-        <p class="vente-total badge bg-success-subtle text-success-emphasis">
-          <i class="bi bi-coin"></i> {{one_produit.prix_vente}} FCFA
-        </p>
+          <!-- Ligne 3 :  -->
+          <p class="vente-date">
+            <i class="bi bi-unity"></i>
+            {{one_produit.unite_mesure.symbole}}
+          </p>
+
+          <!-- Ligne 4 :  -->
+          <p class="vente-total badge bg-success-subtle text-success-emphasis">
+            <i class="bi bi-coin"></i> {{one_produit.prix_vente}} FCFA
+          </p>
+        </div>
       </ion-label>
     </ion-item>
     }
