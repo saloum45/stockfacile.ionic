@@ -1,0 +1,73 @@
+<ion-header [translucent]="true" class="shadow-none">
+  <ion-toolbar>
+    <ion-chip (click)="modalService.dismiss()">
+      <i class="bi bi-x-circle me-1"></i>
+      <ion-label>Fermer</ion-label>
+    </ion-chip>
+    <ion-chip slot="end" class="validate-button">
+      <ion-label>Modifier</ion-label>
+      <i class="bi bi-pencil-square ms-1"></i>
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="vente-detail-content ion-padding">
+
+  <!-- Section entête -->
+  <div class="header-card">
+    <h2 class="vente-id">Vente #{{ ventes_to_view?.id }}</h2>
+    <p class="vente-date">
+      <i class="bi bi-calendar-event me-1"></i>
+      {{ ventes_to_view?.date | date:'d MMMM yyyy' }} à {{ ventes_to_view?.created_at | date:'HH:mm' }}
+    </p>
+    <p class="vente-client">
+      <i class="bi bi-person me-1"></i>
+      {{ ventes_to_view?.client?.nom_client || 'Client inconnu' }}
+    </p>
+
+    <div class="status-total">
+      <ion-badge [color]="ventes_to_view?.etat_vente?.id === 1 ? 'success' : 'danger'">
+        {{ ventes_to_view?.etat_vente?.libelle_etat_vente || 'En attente' }}
+      </ion-badge>
+      <div class="total">
+        <strong>Total :</strong>
+        <span class="text-success fw-bold">
+          {{ getTotal(ventes_to_view?.detail_ventes) | number:'':'fr' }} FCFA
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Liste des produits -->
+  <ion-list class="produit-list">
+    <ion-list-header lines="none">
+      <h3>Produits</h3>
+    </ion-list-header>
+
+    <ng-container *ngIf="ventes_to_view?.detail_ventes?.length;">
+      @for (detail of ventes_to_view.detail_ventes; track $index) {
+      <ion-item class="produit-item">
+        <ion-label class="ion-text-wrap">
+          <h4>{{ detail.produit?.libelle_produit || 'Produit inconnu' }}</h4>
+          <p>Quantité : <strong>{{ detail.quantite }}</strong></p>
+          <p>Prix unitaire : {{ detail.prix_unitaire | number:'':'fr' }} FCFA</p>
+          <p>Entrepôt : {{ detail.rangement?.entrepot?.libelle_entrepot || 'N/A' }}</p>
+          <p>Rangement : {{ detail.rangement?.libelle_rangement || '-' }}</p>
+        </ion-label>
+        <div slot="end" class="sous-total">
+          {{ (detail.quantite * detail.prix_unitaire) | number:'':'fr' }} FCFA
+        </div>
+      </ion-item>
+      }
+    </ng-container>
+  </ion-list>
+
+  <!-- Boutons d'action -->
+  <div class="actions">
+    <ion-button fill="solid" color="primary">
+      <i class="bi bi-file-earmark-text me-1"></i> Facture
+    </ion-button>
+    <ion-button fill="outline" color="success">
+      <i class="bi bi-printer me-1"></i> Ticket
+    </ion-button>
+  </div>
+</ion-content>

@@ -6,6 +6,7 @@ import { AddVentesComponent } from '../components/components/ventes/add-ventes/a
 // import { DetailVentesComponents } from '../components/components/ventes/detail-ventes-components/detail-ventes-components';
 import { EditVentesComponent } from '../components/components/ventes/edit-ventes/edit-ventes.component';
 import { ApiService } from '../service/api/api.service';
+import { DetailVentesComponents } from '../components/components/ventes/detail-ventes-components/detail-ventes-components';
 
 
 @Component({
@@ -118,20 +119,20 @@ export class VentesPage implements OnInit {
     }
   }
   async openModal_detail_vente(one_ventes: any) {
-    // const modal = await this.modalService.create({
-    //   component: DetailVentesComponents,
-    //   componentProps: {
-    //     one_commande: one_ventes
-    //   }
-    // });
-    // modal.present();
+   const modal = await this.modalService.create({
+      component: DetailVentesComponents,
+      componentProps: {
+        ventes_to_view: one_ventes
+      }
+    });
+    modal.present();
 
-    // const { data, role } = await modal.onWillDismiss();
+    const { data, role } = await modal.onWillDismiss();
 
-    // if (role === 'confirm') {
-    //   // this.service.successMessage("Commande ajoutée");
-    //   this.filtrer()
-    // }
+    if (role === 'confirm') {
+      // this.service.successMessage("Commande ajoutée");
+      // this.get_ventes()
+    }
   }
 
   // Méthode pour filtrer
