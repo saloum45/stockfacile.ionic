@@ -37,10 +37,7 @@
 
   <!-- Liste des produits -->
   <ion-list class="rounded rounded-3 bg-transparent">
-    <ion-list-header lines="none">
-      <h3 class="fs-5">Produits</h3>
-    </ion-list-header>
-
+    <h3 class="fs-5">Produits</h3>
     <ng-container *ngIf="ventes_to_view?.detail_ventes?.length;">
       @for (detail of ventes_to_view.detail_ventes; track $index) {
       <ion-item class="header-card bg-white rounded rounded-4 mb-2">

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonList, IonItem, IonLabel, IonButton, IonListHeader, IonBadge } from '@ionic/angular/standalone';
+import {  ModalController, IonList, IonItem, IonLabel, IonButton,IonListHeader,IonBadge } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ApiService } from '../service/api/api.service';
   templateUrl: './acomptes.page.html',
   styleUrls: ['./acomptes.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonLabel, IonButton, IonListHeader, IonBadge]
+  imports: [ CommonModule, FormsModule, IonList, IonItem, IonLabel, IonButton,IonListHeader,IonBadge]
 })
 export class AcomptesPage implements OnInit {
 

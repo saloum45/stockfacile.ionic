@@ -19,11 +19,12 @@
     <ion-badge class="badge bg-success-subtle text-success-emphasis w-auto">Reçu : {{chiffrage.montant_recu| number :
       "1.0-0" : "fr-FR"}} FCFA</ion-badge>
   </div>
-  <ion-list-header lines="none" class="d-flex justify-content-between">
-    <h3 class="fs-5">Acomptes - {{acomptes.length}}</h3>
-    <ion-button class="w-25 ms-2 rounded rounded-3" style="--background: var(--base-color);--color:white"
+
+  <div class="d-flex justify-content-between align-items-center mb-1">
+    <span class="fs-5">Acomptes - {{acomptes.length}}</span>
+    <ion-button class="rounded rounded-3" style="--background: var(--base-color);--color:white;"
       (click)="openModal_add_acomptes()"><i class="bi bi-plus-square-dotted"></i></ion-button>
-  </ion-list-header>
+  </div>
   @for (one_acompte of acomptes; track one_acompte) {
   <ion-item class=" rounded rounded-2 mb-2">
     <ion-label>
