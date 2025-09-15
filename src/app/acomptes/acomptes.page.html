@@ -28,35 +28,22 @@
   @for (one_acompte of acomptes; track one_acompte) {
   <ion-item class=" rounded rounded-3 mb-2">
     <ion-label>
-      <!-- Ligne 1 : ID + Badge -->
-      <div class="d-flex justify-content-between align-items-start">
-        <h2 class="vente-id">{{ one_acompte.mode_paiement?.libelle_mode_paiement }}</h2>
-        <span class="badge py-2 px-3 rounded-2" [ngClass]="{
-              'bg-success-subtle text-success-emphasis':
-                one_acompte.etat_vente?.id === 1,
-              'bg-danger-subtle text-danger-emphasis':
-                one_acompte.etat_vente?.id === 2
-            }">
-          {{ one_acompte.etat_vente?.libelle_etat_vente || "En attente" }}
-        </span>
-      </div>
+
+
 
       <!-- Ligne 2 : Date -->
-      <p class="vente-date">
+      <p>
         <i class="bi bi-calendar-event me-1"></i>
         {{ one_acompte.date | date:'dd MMMM yyyy' }} à {{ one_acompte.created_at | date:'HH:mm' }}
       </p>
 
       <!-- Ligne 4 : Total -->
       <div class="d-flex justify-content-between align-items-center">
+        <!-- Ligne 1 : ID + Badge -->
+      <p >{{ one_acompte.mode_paiement?.libelle_mode_paiement }}</p>
         <p class="vente-total badge bg-success-subtle text-success-emphasis">
           {{ one_acompte.montant | number:'':'fr' }} FCFA
         </p>
-        <div class="">
-          <ion-button color="medium" (click)="openModal_edit_acomptes(one_acompte)"><i
-              class="bi bi-pencil-square"></i></ion-button>
-          <ion-button color="medium" (click)="delete_acomptes(one_acompte)"><i class="bi bi-trash3"></i></ion-button>
-        </div>
       </div>
     </ion-label>
   </ion-item>
