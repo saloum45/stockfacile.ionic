@@ -21,9 +21,9 @@
   </div>
   <!-- Liste des ventes -->
   @if (!loading_get_ventes && list.length > 0) {
-  <ion-list>
+  <ion-list class="bg-transparent">
     @for (une_vente of list; track une_vente) {
-    <ion-item button (click)="openModal_detail_vente(une_vente)" class=" rounded rounded-2">
+    <ion-item button (click)="openModal_detail_vente(une_vente)" class=" rounded rounded-2 mb-2">
       <ion-label>
         <!-- Ligne 1 : ID + Badge -->
         <div class="d-flex justify-content-between align-items-start">
