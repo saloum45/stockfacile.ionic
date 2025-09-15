@@ -38,7 +38,7 @@
   <!-- Liste des produits -->
   <ion-list class="rounded rounded-3 bg-transparent">
     <ion-list-header lines="none">
-      <h3>Produits</h3>
+      <h3 class="fs-5">Produits</h3>
     </ion-list-header>
 
     <ng-container *ngIf="ventes_to_view?.detail_ventes?.length;">
@@ -58,7 +58,7 @@
       }
     </ng-container>
   </ion-list>
-
+  <app-acomptes [seletected_vente]="ventes_to_view"></app-acomptes>
   <!-- Boutons d'action -->
   <div class="d-flex justify-content-between w-75 m-auto">
     <ion-button fill="outline" color="medium">

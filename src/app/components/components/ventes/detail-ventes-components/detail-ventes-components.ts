@@ -8,11 +8,12 @@ import { EditVentesComponent } from '../edit-ventes/edit-ventes.component';
 // import { TicketCompoment } from '../ticket.compoment/ticket.compoment';
 // import { NgxPrintModule } from 'ngx-print';
 import { IonContent,IonHeader,IonToolbar,IonLabel,ModalController,IonChip,IonItem,IonList,IonButton,IonListHeader,IonBadge } from '@ionic/angular/standalone';
+import { AcomptesPage } from "src/app/acomptes/acomptes.page";
 
 @Component({
   selector: 'app-detail-ventes-components',
   standalone: true,
-  imports: [DatePipe, DecimalPipe,IonContent,IonHeader,IonToolbar,IonLabel,IonChip,IonItem,IonList,IonButton,IonListHeader,IonBadge,CommonModule],
+  imports: [DatePipe, DecimalPipe, IonContent, IonHeader, IonToolbar, IonLabel, IonChip, IonItem, IonList, IonButton, IonListHeader, IonBadge, CommonModule, AcomptesPage],
   templateUrl: './detail-ventes-components.html',
   styleUrl: './detail-ventes-components.scss'
 })

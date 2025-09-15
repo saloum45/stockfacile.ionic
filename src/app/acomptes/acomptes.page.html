@@ -1,0 +1,63 @@
+<!-- Liste des éléments -->
+<!-- Loading state -->
+<ng-container *ngIf="loading_get_acomptes">
+  <div class="text-center py-5">
+    <div class="spinner-border text-primary-base" role="status">
+      <span class="visually-hidden">Chargement en cours...</span>
+    </div>
+    <p class="mt-2 text-muted fs-5">Chargement en cours...</p>
+  </div>
+</ng-container>
+
+<!-- contenu sous format carte -->
+<!-- Historique des acomptes -->
+<ion-list class=" bg-transparent">
+  <!-- Somme totale des approvisionnements -->
+  <div class="d-flex justify-content-between rounded mb-2 ">
+    <ion-badge class="badge bg-danger-subtle text-danger-emphasis w-auto">Reste : {{chiffrage.reste_a_payer| number :
+      "1.0-0" : "fr-FR"}} FCFA</ion-badge>
+    <ion-badge class="badge bg-success-subtle text-success-emphasis w-auto">Reçu : {{chiffrage.montant_recu| number :
+      "1.0-0" : "fr-FR"}} FCFA</ion-badge>
+  </div>
+  <ion-list-header lines="none" class="d-flex justify-content-between">
+    <h3 class="fs-5">Acomptes - {{acomptes.length}}</h3>
+    <ion-button class="w-25 ms-2 rounded rounded-3" style="--background: var(--base-color);--color:white"
+      (click)="openModal_add_acomptes()"><i class="bi bi-plus-square-dotted"></i></ion-button>
+  </ion-list-header>
+  @for (one_acompte of acomptes; track one_acompte) {
+  <ion-item class=" rounded rounded-2 mb-2">
+    <ion-label>
+      <!-- Ligne 1 : ID + Badge -->
+      <div class="d-flex justify-content-between align-items-start">
+        <h2 class="vente-id">{{ one_acompte.mode_paiement?.libelle_mode_paiement }}</h2>
+        <span class="badge py-2 px-3 rounded-2" [ngClass]="{
+              'bg-success-subtle text-success-emphasis':
+                one_acompte.etat_vente?.id === 1,
+              'bg-danger-subtle text-danger-emphasis':
+                one_acompte.etat_vente?.id === 2
+            }">
+          {{ one_acompte.etat_vente?.libelle_etat_vente || "En attente" }}
+        </span>
+      </div>
+
+      <!-- Ligne 2 : Date -->
+      <p class="vente-date">
+        <i class="bi bi-calendar-event me-1"></i>
+        {{ one_acompte.date | date:'dd MMMM yyyy' }} à {{ one_acompte.created_at | date:'HH:mm' }}
+      </p>
+
+      <!-- Ligne 4 : Total -->
+      <div class="d-flex justify-content-between">
+        <p class="vente-total badge bg-success-subtle text-success-emphasis">
+          {{ one_acompte.montant | number:'':'fr' }} FCFA
+        </p>
+        <div class="">
+          <ion-button color="medium" (click)="openModal_edit_acomptes(one_acompte)"><i
+              class="bi bi-pencil-square"></i></ion-button>
+          <ion-button color="medium" (click)="delete_acomptes(one_acompte)"><i class="bi bi-trash3"></i></ion-button>
+        </div>
+      </div>
+    </ion-label>
+  </ion-item>
+  }
+</ion-list>
