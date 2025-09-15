@@ -26,26 +26,33 @@
       (click)="openModal_add_acomptes()"><i class="bi bi-plus-square-dotted"></i></ion-button>
   </div>
   @for (one_acompte of acomptes; track one_acompte) {
-  <ion-item class=" rounded rounded-3 mb-2">
-    <ion-label>
-
-
-
-      <!-- Ligne 2 : Date -->
-      <p>
-        <i class="bi bi-calendar-event me-1"></i>
-        {{ one_acompte.date | date:'dd MMMM yyyy' }} à {{ one_acompte.created_at | date:'HH:mm' }}
-      </p>
-
-      <!-- Ligne 4 : Total -->
-      <div class="d-flex justify-content-between align-items-center">
-        <!-- Ligne 1 : ID + Badge -->
-      <p >{{ one_acompte.mode_paiement?.libelle_mode_paiement }}</p>
-        <p class="vente-total badge bg-success-subtle text-success-emphasis">
-          {{ one_acompte.montant | number:'':'fr' }} FCFA
+  <ion-item-sliding>
+    <ion-item class=" rounded rounded-3 mb-2">
+      <ion-label>
+        <p>
+          <i class="bi bi-calendar-event me-1"></i>
+          {{ one_acompte.date | date:'dd MMMM yyyy' }} à {{ one_acompte.created_at | date:'HH:mm' }}
         </p>
-      </div>
-    </ion-label>
-  </ion-item>
+        <div class="d-flex justify-content-between align-items-center">
+          <p>{{ one_acompte.mode_paiement?.libelle_mode_paiement }}</p>
+          <p class="vente-total badge bg-success-subtle text-success-emphasis">
+            {{ one_acompte.montant | number:'':'fr' }} FCFA
+          </p>
+        </div>
+      </ion-label>
+    </ion-item>
+    <ion-item-options class="bg-transparent">
+      <ion-item-option  class="bg-transparent text-danger">
+        <ion-button fill="outline" color="medium">
+          <i class="bi bi-pencil-square"></i>
+        </ion-button>
+      </ion-item-option>
+      <ion-item-option class="bg-transparent" >
+        <ion-button fill="outline" color="medium" (click)="delete_acomptes(one_acompte)">
+          <i class="bi bi-trash3"></i>
+        </ion-button>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
   }
 </ion-list>
