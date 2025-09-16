@@ -42,15 +42,15 @@
       @for (detail of ventes_to_view.detail_ventes; track $index) {
       <ion-item class="header-card bg-white rounded rounded-4 mb-2">
         <ion-label class="ion-text-wrap">
-          <h4 class="fw-bold">{{ detail.produit?.libelle_produit || 'Produit inconnu' }}</h4>
+          <h4 class="fw-bold text-primary-base">{{ detail.produit?.libelle_produit || 'Produit inconnu' }}</h4>
           <p>Quantité : <strong>{{ detail.quantite }}</strong></p>
           <p>Prix unitaire : {{ detail.prix_unitaire | number:'':'fr' }} FCFA</p>
           <p>Entrepôt : {{ detail.rangement?.entrepot?.libelle_entrepot || 'N/A' }}</p>
           <p>Rangement : {{ detail.rangement?.libelle_rangement || '-' }}</p>
         </ion-label>
-        <ion-badge class="text-success-emphasis bg-success-subtle">
+        <p class="text-primary-base">
           {{ (detail.quantite * detail.prix_unitaire) | number:'':'fr' }} FCFA
-        </ion-badge>
+        </p>
       </ion-item>
       }
     </ng-container>
