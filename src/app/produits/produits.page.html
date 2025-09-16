@@ -19,8 +19,7 @@
     </div>
   </div>
 
-  <ion-button class="w-100 mt-3 rounded rounded-3" style="--background: var(--base-color);"
-    (click)="openModal_add_produits()"><i class="bi bi-plus-square-dotted me-1"></i></ion-button>
+  <!-- <ion-button class="w-100 mt-3 rounded rounded-3" style="--background: var(--base-color);" (click)="openModal_add_produits()"><i class="bi bi-plus-square-dotted me-1"></i></ion-button> -->
   <!-- Liste des éléments -->
   <!-- Loading state -->
   <ng-container *ngIf="loading_get_produits">
@@ -93,5 +92,10 @@
     <h5 class="text-muted">Aucune donnée trouvée</h5>
     <p class="text-muted">Essayez de modifier vos critères de recherche</p>
   </div>
-
+ <!-- IonFab -->
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button style="--background:var(--base-color);"  (click)="openModal_add_produits()">
+       <i class="bi bi-plus-square-dotted fs-4"></i>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

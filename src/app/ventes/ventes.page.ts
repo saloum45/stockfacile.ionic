@@ -14,7 +14,7 @@ import { DetailVentesComponents } from '../components/components/ventes/detail-v
   templateUrl: './ventes.page.html',
   styleUrls: ['./ventes.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, IonFab, IonFabButton, IonIcon]
+  imports: [CommonModule, FormsModule, IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, IonFab, IonFabButton]
 })
 export class VentesPage implements OnInit {
 
