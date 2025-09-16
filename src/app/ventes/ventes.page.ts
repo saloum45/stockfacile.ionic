@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonList,IonItem,IonLabel,ModalController } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, ModalController, IonFab, IonFabButton, IonIcon } from '@ionic/angular/standalone';
 import { AddVentesComponent } from '../components/components/ventes/add-ventes/add-ventes.component';
 // import { DetailVentesComponents } from '../components/components/ventes/detail-ventes-components/detail-ventes-components';
 import { EditVentesComponent } from '../components/components/ventes/edit-ventes/edit-ventes.component';
@@ -14,7 +14,7 @@ import { DetailVentesComponents } from '../components/components/ventes/detail-v
   templateUrl: './ventes.page.html',
   styleUrls: ['./ventes.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule,IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonList,IonItem,IonLabel]
+  imports: [CommonModule, FormsModule, IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, IonFab, IonFabButton, IonIcon]
 })
 export class VentesPage implements OnInit {
 
@@ -39,7 +39,8 @@ export class VentesPage implements OnInit {
   };
   list: any = [];
   tabs_choice = 1;
-  constructor(public api: ApiService, private modalService: ModalController) { }
+  constructor(public api: ApiService, private modalService: ModalController) {
+  }
   ngOnInit(): void {
     this.get_ventes()
   }
@@ -119,7 +120,7 @@ export class VentesPage implements OnInit {
     }
   }
   async openModal_detail_vente(one_ventes: any) {
-   const modal = await this.modalService.create({
+    const modal = await this.modalService.create({
       component: DetailVentesComponents,
       componentProps: {
         ventes_to_view: one_ventes

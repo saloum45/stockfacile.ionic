@@ -11,13 +11,12 @@
     </ion-toolbar>
   </ion-header> -->
   <div class="d-flex w-100 mb-2">
-    <div class="tabs-choises d-flex justify-content-between p-2 m-auto w-75">
+    <div class="tabs-choises d-flex justify-content-between p-2 m-auto w-100">
       <button (click)="tabs_choice_change(1)" [ngClass]="{'tabs-choises_button_active':tabs_choice==1}">Toutes</button>
       <button (click)="tabs_choice_change(2)" [ngClass]="{'tabs-choises_button_active':tabs_choice==2}">Dette</button>
       <button (click)="tabs_choice_change(3)" [ngClass]="{'tabs-choises_button_active':tabs_choice==3}">Sans</button>
     </div>
-    <ion-button class="w-25 ms-2 rounded rounded-3" style="--background: var(--base-color);"
-      (click)="openModal_add_ventes()"><i class="bi bi-plus-square-dotted me-1"></i></ion-button>
+    <!-- <ion-button class="w-25 ms-2 rounded rounded-3" style="--background: var(--base-color);" (click)="openModal_add_ventes()"><i class="bi bi-plus-square-dotted me-1"></i></ion-button> -->
   </div>
   <!-- Liste des ventes -->
   @if (!loading_get_ventes && list.length > 0) {
@@ -84,4 +83,11 @@
     </div>
   </ng-container>
 
+
+  <!-- IonFab -->
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button style="--background:var(--base-color);"  (click)="openModal_add_ventes()">
+       <i class="bi bi-plus-square-dotted fs-4"></i>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
