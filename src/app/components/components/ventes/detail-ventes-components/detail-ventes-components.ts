@@ -7,13 +7,14 @@ import { EditVentesComponent } from '../edit-ventes/edit-ventes.component';
 // import { FactureCompoment } from '../facture.compoment/facture.compoment';
 // import { TicketCompoment } from '../ticket.compoment/ticket.compoment';
 // import { NgxPrintModule } from 'ngx-print';
-import { IonContent,IonHeader,IonToolbar,IonLabel,ModalController,IonChip,IonItem,IonList,IonButton,IonListHeader,IonBadge,IonFab, IonFabButton ,IonFabList} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonToolbar, IonLabel, ModalController, IonChip, IonItem, IonList, IonButton, IonListHeader, IonBadge, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
 import { AcomptesPage } from "src/app/acomptes/acomptes.page";
+import { AddAcomptesComponent } from '../../acomptes/add-acomptes/add-acomptes.component';
 
 @Component({
   selector: 'app-detail-ventes-components',
   standalone: true,
-  imports: [DatePipe, DecimalPipe, IonContent, IonHeader, IonToolbar, IonLabel, IonChip, IonItem, IonList, IonButton, IonListHeader, IonBadge, CommonModule, AcomptesPage,IonFab, IonFabButton,IonFabList],
+  imports: [DatePipe, DecimalPipe, IonContent, IonHeader, IonToolbar, IonLabel, IonChip, IonItem, IonList, IonButton, IonListHeader, IonBadge, CommonModule, AcomptesPage, IonFab, IonFabButton, IonFabList],
   templateUrl: './detail-ventes-components.html',
   styleUrl: './detail-ventes-components.scss'
 })
@@ -59,5 +60,22 @@ export class DetailVentesComponents {
 
   acompte_added(event: any) {
     this.ventes_to_view.acomptes.push(event)
+  }
+
+  async openModal_add_acomptes() {
+    const modal = await this.modalService.create({
+      component: AddAcomptesComponent,
+      componentProps: {
+        selected_vente: this.ventes_to_view
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.service.successMessage("Commande ajoutée");
+      // this.get_acomptes()
+    }
   }
 }
