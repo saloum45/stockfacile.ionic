@@ -39,7 +39,21 @@ export class DetailVentesComponents {
   }
 
 
-  openModal_edit_ventes() {
+  async openModal_edit_ventes() {
+    const modal = await this.modalService.create({
+      component: EditVentesComponent,
+      componentProps: {
+        ventes_to_edit: this.ventes_to_view,
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.service.successMessage("Commande ajoutée");
+      this.ventes_to_view = data.data[0]
+    }
     // let options: any = {
     //   centered: true,
     //   scrollable: true,
@@ -75,7 +89,7 @@ export class DetailVentesComponents {
 
     if (data?.status_code) {
       // this.service.successMessage("Commande ajoutée");
-      this.ventes_to_view={...this.ventes_to_view}
+      this.ventes_to_view = { ...this.ventes_to_view }
     }
   }
 }

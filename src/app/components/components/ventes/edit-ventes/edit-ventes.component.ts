@@ -3,12 +3,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormArray, FormsModule } from '@angular/forms';
 import { ApiService } from '../../../../service/api/api.service';
 import { CommonModule } from '@angular/common';
-import { ModalController } from '@ionic/angular';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { IonContent, IonHeader, IonToolbar, ModalController,IonLabel,IonChip } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-edit-ventes',
   standalone: true, // Composant autonome
-  imports: [CommonModule, ReactiveFormsModule, NgSelectModule, FormsModule], // Dépendances importées
+  imports: [CommonModule, ReactiveFormsModule, NgSelectModule, FormsModule,IonContent, IonHeader, IonToolbar,IonLabel,IonChip], // Dépendances importées
   templateUrl: './edit-ventes.component.html',
   styleUrls: ['./edit-ventes.component.scss']
 })

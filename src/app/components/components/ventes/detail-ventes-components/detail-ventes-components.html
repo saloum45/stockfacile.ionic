@@ -1,13 +1,9 @@
 <ion-header [translucent]="true" class="shadow-none">
   <ion-toolbar>
-    <ion-chip (click)="modalService.dismiss()">
+    <ion-chip (click)="modalService.dismiss(this.ventes_to_view)">
       <i class="bi bi-x-circle me-1"></i>
       <ion-label>Fermer</ion-label>
     </ion-chip>
-    <!-- <ion-chip slot="end" class="validate-button">
-      <ion-label>Modifier</ion-label>
-      <i class="bi bi-pencil-square ms-1"></i>
-    </ion-chip> -->
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" class="vente-detail-content ion-padding">
@@ -75,7 +71,7 @@
       <ion-fab-button style="--background:var(--base-color);--color:white" (click)="openModal_add_acomptes()">
         <i class="bi bi-plus-square-dotted"></i>
       </ion-fab-button>
-      <ion-fab-button style="--background:var(--base-color);--color:white">
+      <ion-fab-button style="--background:var(--base-color);--color:white" (click)="openModal_edit_ventes()">
         <i class="bi bi-pencil-square"></i>
       </ion-fab-button>
       <ion-fab-button style="--background:var(--base-color);--color:white">

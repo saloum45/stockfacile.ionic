@@ -1,8 +1,17 @@
-<div class="modal-header" data-bs-theme="ligth">
-  <h1 class="modal-title fs-5">Modifier ventes</h1>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
-</div>
-<div class="modal-body">
+<ion-header [translucent]="true" class="shadow-none">
+  <ion-toolbar>
+    <ion-chip (click)="activeModal.dismiss()">
+      <i class="bi bi-x-circle me-1"></i>
+      <ion-label>Fermer</ion-label>
+    </ion-chip>
+    <ion-chip slot="end" class="validate-button" [disabled]="loading_edit_ventes||loading_get_details_edit_ventes_form||reactiveForm_edit_ventes.pristine"
+    (click)="form_edit_ventes.ngSubmit.emit()">
+      <ion-label>Valider</ion-label>
+      <i class="bi bi-pencil-square ms-1"></i>
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
   <form [formGroup]="reactiveForm_edit_ventes" (ngSubmit)="onSubmit_edit_ventes()" #form_edit_ventes="ngForm"
     class="p-3">
     <div class="row g-3 mb-4">
@@ -175,37 +184,6 @@
       </div>
     </div>
 
-    <!-- <div class="row">
-      <div class="col-12 col-md-5">
-        <label class="form-label small fw-medium">Type de paiement <span class="text-danger">*</span></label>
-        <ng-select class="form-control" formControlName="id_mode_paiement" [items]="form_details.mode_paiements"
-          bindLabel="libelle_mode_paiement" bindValue="id" placeholder="Sélectionner un type de paiement"
-          [clearable]="true" [searchable]="true" [loading]="loading_get_details_edit_ventes_form" [ngClass]="{
-            'is-invalid': submitted && f.id_mode_paiement?.errors
-          }" appendTo="body">
-        </ng-select>
-        @if (submitted && f.id_mode_paiement?.errors?.['required']) {
-        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
-        }
-      </div>
-
-      <div class="col-12 col-md-7">
-        <label class="form-label small fw-medium">Montant verser <span class="text-danger">*</span></label>
-        <input type="number" class="form-control form-control-lg" formControlName="montant_verser" placeholder="0.00"
-          step="0.01" [max]=" calculer_total()" [ngClass]="{
-            'is-invalid': submitted && f.montant_verser?.errors
-          }" />
-        @if (submitted && f.montant_verser?.errors?.['required']) {
-        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
-        }
-        @if (submitted && f.montant_verser?.errors?.['max']) {
-        <div class="invalid-feedback d-block">
-          Le montant ne doit pas être supérieur à {{ calculer_total()| currency : "XOF" : "" : "1.0-2" }}
-        </div>
-        }
-      </div>
-    </div> -->
-
     <div class="text-end mt-3">
       <h6>
         Total à payer :
@@ -215,20 +193,4 @@
       </h6>
     </div>
   </form>
-</div>
-<!-- Footer -->
-<div class="modal-footer border-0 pt-0">
-  <button type="button" class="btn btn-outline-secondary px-4" (click)="activeModal.dismiss()">
-    Annuler
-  </button>
-  <button type="button" class="btn btn-primary"
-    [disabled]="loading_edit_ventes||loading_get_details_edit_ventes_form||reactiveForm_edit_ventes.pristine"
-    (click)="form_edit_ventes.ngSubmit.emit()">
-    <span *ngIf="loading_edit_ventes">
-      <i class="bi bi-hourglass-split me-1"></i> Enregistrement...
-    </span>
-    <span *ngIf="!loading_edit_ventes">
-      <i class="bi bi-check-circle me-1"></i> Enregistrer
-    </span>
-  </button>
-</div>
+</ion-content>

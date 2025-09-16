@@ -134,6 +134,13 @@ export class VentesPage implements OnInit {
       // this.service.successMessage("Commande ajoutée");
       // this.get_ventes()
     }
+      this.list = this.list.map((item: any) =>
+        item.id === data.id ? data : item
+      );
+      this.ventes = this.ventes.map((item: any) =>
+        item.id === data.id ? data : item
+      );
+      this.filtrer();
   }
 
   // Méthode pour filtrer
