@@ -25,8 +25,8 @@ export class LoginPage implements OnInit {
   }
   init_form() {
     this.reactiveForm_login_login = this.formBuilder.group({
-      email: ["saloumfall45@gmail.com", Validators.required],
-      password: ["Stock_Admin_Facile", Validators.required]
+      email: ["", Validators.required],
+      password: ["", Validators.required]
     });
   }
 
