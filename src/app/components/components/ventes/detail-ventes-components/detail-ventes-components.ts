@@ -75,7 +75,7 @@ export class DetailVentesComponents {
 
     if (data?.status_code) {
       // this.service.successMessage("Commande ajoutée");
-      // this.get_acomptes()
+      this.ventes_to_view={...this.ventes_to_view}
     }
   }
 }
