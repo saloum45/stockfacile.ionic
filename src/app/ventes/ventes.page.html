@@ -51,7 +51,7 @@
 
         <!-- Ligne 4 : Total -->
         <p class="vente-total text-primary-base">
-          <i class="bi bi-coin"></i> {{ getTotal(une_vente.detail_ventes) }} FCFA
+          <i class="bi bi-coin"></i> {{ getTotal(une_vente.detail_ventes)| number:'':'fr' }} FCFA
         </p>
       </ion-label>
     </ion-item>
