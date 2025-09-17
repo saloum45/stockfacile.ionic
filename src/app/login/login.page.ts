@@ -75,6 +75,7 @@ export class LoginPage implements OnInit {
       }
       this.loading_login_login = false;
     }, (error: any) => {
+      this.api.Swal_error("Email ou mot de passe incorrect")
       this.loading_login_login = false;
     });
   }
