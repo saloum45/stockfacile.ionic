@@ -51,15 +51,16 @@
         </p>
 
         <!-- Ligne 3 : Client -->
-        <p class="vente-client">
-          <i class="bi bi-person me-1 text-primary-base"></i>
-          {{ une_vente.client?.nom_client || "Client inconnu" }}
-        </p>
-
-        <!-- Ligne 4 : Total -->
-        <p class="vente-total text-primary-base">
-          <i class="bi bi-coin"></i> {{ getTotal(une_vente.detail_ventes)| number:'':'fr' }} FCFA
-        </p>
+        <div class="d-flex justify-content-between">
+          <p class="vente-client">
+            <i class="bi bi-person me-1 text-primary-base"></i>
+            {{ une_vente.client?.nom_client || "Client inconnu" }}
+          </p>
+          <!-- Ligne 4 : Total -->
+          <p class="vente-total text-primary-base">
+            <i class="bi bi-coin"></i> {{ getTotal(une_vente.detail_ventes)| number:'':'fr' }} FCFA
+          </p>
+        </div>
       </ion-label>
     </ion-item>
     }
