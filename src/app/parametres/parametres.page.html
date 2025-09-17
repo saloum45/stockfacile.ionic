@@ -7,12 +7,11 @@
 <ion-content [fullscreen]="true">
 
   <ion-row class="ion-padding-top ion-padding-bottom">
-    <ion-col size="12">
-      <!--Using items input-->
+    <!-- <ion-col size="12">
       <ng-select [items]="entreprises" bindLabel="nom_entreprise" bindValue="id" [(ngModel)]="api.id_current_entreprise"
         (change)="loading_entreprise()" [clearable]="false">
       </ng-select>
-    </ion-col>
+    </ion-col> -->
     <ion-col size="4" class="text-center" [routerLink]="['/tabs/produits']">
         <ion-card class="menu-card">
           <ion-card-content>
@@ -40,7 +39,7 @@
       </ion-card>
     </ion-col>
 
-    <ion-col size="4" class="text-center" (click)="api.Swal_blue('Conception en cours disponible bientot 💻')">
+    <ion-col size="4" class="text-center" [routerLink]="['/tabs/clients']">
       <ion-card class="menu-card">
         <ion-card-content>
           <i class="bi bi-people fs-2 icon-color"></i>
