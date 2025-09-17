@@ -1,0 +1,62 @@
+<ion-header [translucent]="true" class="shadow-none">
+  <ion-toolbar>
+    <ion-chip (click)="activeModal.dismiss()">
+      <i class="bi bi-x-circle me-1"></i>
+      <ion-label>Fermer</ion-label>
+    </ion-chip>
+    <ion-chip slot="end" class="validate-button" [disabled]="loading_add_clients ||
+      loading_get_details_add_clients_form"
+      (click)="form_add_clients.ngSubmit.emit()">
+      <ion-label>Valider</ion-label>
+      <i class="bi bi-check2-circle ms-1"></i>
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="reactiveForm_add_clients" (ngSubmit)="onSubmit_add_clients()" #form_add_clients="ngForm"
+    class="row">
+
+    <!-- Champ Nom Client -->
+    <div class="form-group col-sm-12">
+      <label>Nom Client <span class="text-danger">*</span></label>
+      <input class="form-control" type="text" formControlName="nom_client" placeholder="Nom Client"
+        [ngClass]="{ 'is-invalid': submitted && f.nom_client.errors }" />
+      @if (submitted && f.nom_client.errors) {
+      <div class="invalid-feedback">
+        @if (f.nom_client.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Champ Telephone -->
+    <div class="form-group col-sm-6">
+      <label>Telephone</label>
+      <input class="form-control" type="text" formControlName="telephone" placeholder="Telephone"
+        [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
+      @if (submitted && f.telephone.errors) {
+      <div class="invalid-feedback">
+        @if (f.telephone.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Champ Adresse -->
+    <div class="form-group col-sm-6">
+      <label>Adresse</label>
+      <input class="form-control" type="text" formControlName="adresse" placeholder="Adresse"
+        [ngClass]="{ 'is-invalid': submitted && f.adresse.errors }" />
+      @if (submitted && f.adresse.errors) {
+      <div class="invalid-feedback">
+        @if (f.adresse.errors.required) {
+        <div>Ce champ est obligatoire</div>
+        }
+      </div>
+      }
+    </div>
+
+  </form>
+</ion-content>

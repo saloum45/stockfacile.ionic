@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonList, IonItem, IonLabel, IonButton, IonItemOption, IonItemOptions, IonItemSliding, IonFab, IonFabButton, IonBadge } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
+import { AddClientsComponent } from '../components/components/clients/add-clients/add-clients.component';
 
 @Component({
   selector: 'app-clients',
@@ -86,21 +87,18 @@ export class ClientsPage implements OnInit {
         this.loading_delete_clients = false;
       })
   }
-  openModal_add_clients() {
-    // let options: any = {
-    //   centered: true,
-    //   scrollable: true,
-    //   size: "lg"//'sm' | 'lg' | 'xl' | string
-    // }
-    // const modalRef = this.modalService.open(AddClientsComponent, { ...options, backdrop: 'static' })
-    // modalRef.result.then((result: any) => {
-    //   console.log('Modal closed with:', result);
-    //   if (result?.status_code) {
-    //     this.get_clients()
-    //   } else {
+  async openModal_add_clients() {
+    const modal = await this.modalService.create({
+      component: AddClientsComponent,
+    });
+    modal.present();
 
-    //   }
-    // })
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.service.successMessage("Commande ajoutée");
+      this.get_clients()
+    }
   }
   openModal_edit_clients(one_clients: any) {
     // let options: any = {
@@ -140,7 +138,7 @@ export class ClientsPage implements OnInit {
       acompte: 0
     }
     this.list.map((one_client: any) => {
-      one_client.dette=0;
+      one_client.dette = 0;
       one_client.ventes.map((one_vente: any) => {
         let montant_total = 0, montant_recu = 0;
         if (one_vente.etat_vente.id == 1) {
@@ -155,14 +153,14 @@ export class ClientsPage implements OnInit {
         }
         one_vente.montant_total = montant_total;
         one_vente.montant_recu = montant_recu;
-        one_client.dette+=montant_total-montant_recu;
+        one_client.dette += montant_total - montant_recu;
       });
     });
     this.chiffrage.dette = this.chiffrage.recette - this.chiffrage.acompte;
     if (this.tabs_choice == 2) {
-      this.list = this.list.filter((one_client: any) => one_client.dette>0);
+      this.list = this.list.filter((one_client: any) => one_client.dette > 0);
     } else if (this.tabs_choice == 3) {
-      this.list = this.list.filter((one_client: any) => one_client.dette==0);
+      this.list = this.list.filter((one_client: any) => one_client.dette == 0);
     }
     // console.warn(this.list)
   }
