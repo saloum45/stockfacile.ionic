@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, ModalController, IonFab, IonFabButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, ModalController, IonFab, IonFabButton,IonBadge } from '@ionic/angular/standalone';
 import { AddVentesComponent } from '../components/components/ventes/add-ventes/add-ventes.component';
 // import { DetailVentesComponents } from '../components/components/ventes/detail-ventes-components/detail-ventes-components';
 import { EditVentesComponent } from '../components/components/ventes/edit-ventes/edit-ventes.component';
@@ -14,7 +14,7 @@ import { DetailVentesComponents } from '../components/components/ventes/detail-v
   templateUrl: './ventes.page.html',
   styleUrls: ['./ventes.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, IonFab, IonFabButton]
+  imports: [CommonModule, FormsModule, IonContent, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, IonFab, IonFabButton,IonBadge]
 })
 export class VentesPage implements OnInit {
 
