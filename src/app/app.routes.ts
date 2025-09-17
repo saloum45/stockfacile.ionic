@@ -1,32 +1,19 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guard/auth/auth.guard';
 
 export const routes: Routes = [
   {
-    path: '',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage),
-  },
-  {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./login/login.page').then(m => m.LoginPage),
   },
   {
-    path: 'produits',
-    loadComponent: () => import('./produits/produits.page').then( m => m.ProduitsPage)
-  },
-  {
-    path: 'approvisionnements',
-    loadComponent: () => import('./approvisionnements/approvisionnements.page').then( m => m.ApprovisionnementsPage)
-  },
-  {
-    path: 'approvisionnements',
-    loadComponent: () => import('./approvisionnements/approvisionnements.page').then( m => m.ApprovisionnementsPage)
-  },
-  {
-    path: 'acomptes',
-    loadComponent: () => import('./acomptes/acomptes.page').then( m => m.AcomptesPage)
-  },
+    path: '',
+    redirectTo: 'tabs',
+    pathMatch: 'full',
+  }
 ];

@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api/api.service';
-import { IonContent,IonInput,IonInputPasswordToggle,IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonInput, IonInputPasswordToggle, IonButton } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule,ReactiveFormsModule,IonContent,IonInput,IonInputPasswordToggle,IonButton],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonContent, IonInput, IonInputPasswordToggle, IonButton],
 })
 export class LoginPage implements OnInit {
 
@@ -20,8 +20,13 @@ export class LoginPage implements OnInit {
   showPassword: boolean = false;
   constructor(private formBuilder: FormBuilder, public api: ApiService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.init_form()
+    this.api.get_token().then(token => {
+      if (token) {
+        this.router.navigate(['/tabs']);
+      }
+    });
   }
   init_form() {
     this.reactiveForm_login_login = this.formBuilder.group({
