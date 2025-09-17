@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonList, IonItem, IonLabel, IonButton, IonItemOption, IonItemOptions, IonItemSliding, IonFab, IonFabButton, IonBadge } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
 import { AddClientsComponent } from '../components/components/clients/add-clients/add-clients.component';
+import { EditClientsComponent } from '../components/components/clients/edit-clients/edit-clients.component';
 
 @Component({
   selector: 'app-clients',
@@ -100,22 +101,21 @@ export class ClientsPage implements OnInit {
       this.get_clients()
     }
   }
-  openModal_edit_clients(one_clients: any) {
-    // let options: any = {
-    //   centered: true,
-    //   scrollable: true,
-    //   size: "lg"//'sm' | 'lg' | 'xl' | string
-    // }
-    // const modalRef = this.modalService.open(EditClientsComponent, { ...options, backdrop: 'static', })
-    // modalRef.componentInstance.clients_to_edit = one_clients;
-    // modalRef.result.then((result: any) => {
-    //   console.log('Modal closed with:', result);
-    //   if (result?.status_code) {
-    //     this.get_clients()
-    //   } else {
+  async openModal_edit_clients(one_clients: any) {
+    const modal = await this.modalService.create({
+      component: EditClientsComponent,
+      componentProps: {
+        clients_to_edit: one_clients
+      }
+    });
+    modal.present();
 
-    //   }
-    // })
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.service.successMessage("Commande ajoutée");
+      this.get_clients()
+    }
   }
 
   // Méthode pour filtrer les approvisionnements

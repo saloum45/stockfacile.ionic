@@ -3,11 +3,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../../../service/api/api.service';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonList, IonItem, IonLabel, IonButton, IonItemOption, IonItemOptions, IonItemSliding, IonFab, IonFabButton, IonBadge ,IonChip} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonToolbar, ModalController, IonLabel,IonChip} from '@ionic/angular/standalone';
 @Component({
   selector: 'app-add-clients',
   standalone: true, // Composant autonome
-  imports: [CommonModule, ReactiveFormsModule,IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonItemOption, IonItemOptions, IonItemSliding, IonFab, IonFabButton, IonBadge,IonChip ], // Dépendances importées
+  imports: [CommonModule, ReactiveFormsModule,IonContent, IonHeader,IonToolbar, IonLabel,IonChip ], // Dépendances importées
   templateUrl: './add-clients.component.html',
   styleUrls: ['./add-clients.component.scss']
 })
