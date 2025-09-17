@@ -108,6 +108,10 @@ export class AcomptesPage implements OnInit {
       })
   }
   async openModal_add_acomptes() {
+    if (this.chiffrage.total_vente == this.chiffrage.montant_recu) {
+      this.api.Swal_info("Cette vente a entièrement été payée");
+      return
+    }
     const modal = await this.modalService.create({
       component: AddAcomptesComponent,
       componentProps: {

@@ -3,22 +3,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ApiService } from '../service/api/api.service';
-import { IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonCol,IonCard,IonCardContent,IonRow } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonCol, IonCard, IonCardContent, IonRow } from '@ionic/angular/standalone';
 import { IonicModule } from "@ionic/angular";
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-parametres',
   templateUrl: './parametres.page.html',
   styleUrls: ['./parametres.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, NgSelectModule, IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonCol, IonCard, IonCardContent, IonRow,RouterLink]
+  imports: [CommonModule, FormsModule, NgSelectModule, IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonCol, IonCard, IonCardContent, IonRow, RouterLink]
 })
 export class ParametresPage implements OnInit {
   loading_get_entreprises = false;
   entreprises: any = [];
 
-  constructor(public api: ApiService) { }
+  constructor(public api: ApiService, private router: Router) { }
 
   ngOnInit() {
     // this.get_entreprises();
@@ -51,5 +51,13 @@ export class ParametresPage implements OnInit {
       this.api.id_current_privilege = this.api.get_from_local_storage('id_current_privilege');
       this.api.loading_current_entreprise = false;
     }, 500);
+  }
+
+  async deconnexion() {
+    if (! await this.api.Swal_confirm("De vouloir supprimer")) {
+      return
+    }
+    this.api.delete_from_local_storage("token");
+    this.router.navigate(['/login']);
   }
 }
