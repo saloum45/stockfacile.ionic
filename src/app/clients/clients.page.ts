@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonList, 
 import { ApiService } from '../service/api/api.service';
 import { AddClientsComponent } from '../components/components/clients/add-clients/add-clients.component';
 import { EditClientsComponent } from '../components/components/clients/edit-clients/edit-clients.component';
+import { DetailsClient } from '../components/components/clients/details-client/details-client';
 
 @Component({
   selector: 'app-clients',
@@ -115,6 +116,22 @@ export class ClientsPage implements OnInit {
     if (data?.status_code) {
       // this.service.successMessage("Commande ajoutée");
       this.get_clients()
+    }
+  }
+  async openModal_details_clients(one_clients: any) {
+    const modal = await this.modalService.create({
+      component: DetailsClient,
+      componentProps: {
+        clients_to_view: one_clients
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.service.successMessage("Commande ajoutée");
+      // this.get_clients()
     }
   }
 
