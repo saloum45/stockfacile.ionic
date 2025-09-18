@@ -1,8 +1,8 @@
 <ion-header [translucent]="true" class="shadow-none">
   <ion-toolbar>
     <ion-chip (click)="modalService.dismiss(this.clients_to_view)">
-      <i class="bi bi-x-circle me-1"></i>
-      <ion-label>Fermer</ion-label>
+      <i class="bi bi-x-circle"></i>
+
     </ion-chip>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +10,7 @@
   <!-- Section entête -->
   <div class="header-card bg-white rounded rounded-4 p-2 text-center">
     <h2 class="text-primary-base fw-bold"> <i class="bi bi-person-check"></i> {{selected_clients?.nom_client}}</h2>
-    <p class="text-primary-base">
+    <p class="text-primary-base" (click)="appeler(selected_clients?.telephone)">
       <i class="bi bi-telephone-inbound"></i>
       {{selected_clients?.telephone||"?"}}
     </p>

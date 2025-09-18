@@ -1,8 +1,8 @@
 <ion-header [translucent]="true" class="shadow-none">
   <ion-toolbar>
     <ion-chip (click)="activeModal.dismiss()">
-      <i class="bi bi-x-circle me-1"></i>
-      <ion-label>Fermer</ion-label>
+      <i class="bi bi-x-circle"></i>
+
     </ion-chip>
     <ion-chip slot="end" class="validate-button" [disabled]="loading_edit_produits ||
       loading_get_details_edit_produits_form ||reactiveForm_edit_produits.pristine" (click)="form_edit_produits.ngSubmit.emit()">

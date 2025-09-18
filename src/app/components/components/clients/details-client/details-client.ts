@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/service/api/api.service';
 import { DetailVentesComponents } from '../../ventes/detail-ventes-components/detail-ventes-components';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonToolbar, ModalController, IonLabel,IonChip,IonList,IonItem,IonBadge} from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonToolbar, ModalController, IonLabel, IonChip, IonList, IonItem, IonBadge } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-details-client',
-  imports: [CommonModule, FormsModule,IonContent, IonHeader, IonToolbar, IonLabel,IonChip,IonList,IonItem,IonBadge],
+  imports: [CommonModule, FormsModule, IonContent, IonHeader, IonToolbar, IonLabel, IonChip, IonList, IonItem, IonBadge],
   templateUrl: './details-client.html',
   styleUrl: './details-client.scss'
 })
@@ -19,7 +19,7 @@ export class DetailsClient {
   clients_to_edit: any = undefined
   ventes: any = [];
   loading_delete_clients = false
-  @Input()clients_to_view:any;
+  @Input() clients_to_view: any;
   id_client = null;
   chiffrage: any = {
     recette: 0,
@@ -78,7 +78,7 @@ export class DetailsClient {
     return detailVentes.reduce((sum, item) => sum + (item.quantite * item.prix_unitaire), 0);
   }
 
- async openModal_detail_vente(one_ventes: any) {
+  async openModal_detail_vente(one_ventes: any) {
     const modal = await this.modalService.create({
       component: DetailVentesComponents,
       componentProps: {
@@ -93,13 +93,13 @@ export class DetailsClient {
       // this.service.successMessage("Commande ajoutée");
       // this.get_ventes()
     }
-      this.list = this.list.map((item: any) =>
-        item.id === data.id ? data : item
-      );
-      this.ventes = this.ventes.map((item: any) =>
-        item.id === data.id ? data : item
-      );
-      this.filtrer();
+    this.list = this.list.map((item: any) =>
+      item.id === data.id ? data : item
+    );
+    this.ventes = this.ventes.map((item: any) =>
+      item.id === data.id ? data : item
+    );
+    this.filtrer();
   }
 
   // Réinitialise les filtres de dates quand on change de type
@@ -196,5 +196,14 @@ export class DetailsClient {
   tabs_choice_change(type: number) {
     this.tabs_choice = type;
     this.filtrer();
+  }
+
+  appeler(recipient:any) {
+    if (!recipient) {
+      this.api.Swal_blue("Ce client n'a pas de numéro")
+      return;
+    }
+    const callLink = `tel:${recipient}`;
+    window.location.href = callLink;
   }
 }
