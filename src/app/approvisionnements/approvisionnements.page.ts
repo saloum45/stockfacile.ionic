@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
-import { ModalController, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions, IonFab, IonFabButton } from '@ionic/angular/standalone';
+import { ModalController, IonList, IonItem, IonLabel, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { CountUpPipe } from "../pipes/count-up-pipe";
 import { DetailApprovisionnementComponent } from '../components/components/approvisionnements/detail-approvisionnement-component/detail-approvisionnement-component';
+import { AddApprovisionnementsComponent } from '../components/components/approvisionnements/add-approvisionnements/add-approvisionnements.component';
 
 @Component({
   selector: 'app-approvisionnements',
@@ -84,21 +85,20 @@ export class ApprovisionnementsPage implements OnInit {
         this.loading_delete_approvisionnements = false;
       })
   }
-  openModal_add_approvisionnements() {
-    // let options: any = {
-    //   centered: true,
-    //   scrollable: true,
-    //   size: "xl"//'sm' | 'lg' | 'xl' | string
-    // }
-    // const modalRef = this.modalService.open(AddApprovisionnementsComponent, { ...options, backdrop: 'static' })
-    // modalRef.result.then((result: any) => {
-    //   console.log('Modal closed with:', result);
-    //   if (result?.status_code) {
-    //     this.get_approvisionnements()
-    //   } else {
+  async openModal_add_approvisionnements() {
+    const modal = await this.modalService.create({
+      component: AddApprovisionnementsComponent,
+      // componentProps: {
+      //   approvisionnements_to_view: one_approvisionnements
+      // }
+    });
+    modal.present();
 
-    //   }
-    // })
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      this.get_approvisionnements()
+    }
   }
   openModal_edit_approvisionnements(one_approvisionnements: any) {
     // let options: any = {
