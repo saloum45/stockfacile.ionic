@@ -14,10 +14,8 @@
 <ion-list class=" bg-transparent">
   <!-- Somme totale  -->
   <div class="d-flex justify-content-between rounded my-2 ">
-    <ion-badge class="badge bg-danger-subtle text-danger-emphasis w-auto">Reste : {{chiffrage.reste_a_payer| number :
-      "1.0-0" : "fr-FR"}} FCFA</ion-badge>
-    <ion-badge class="badge bg-success-subtle text-success-emphasis w-auto">Reçu : {{chiffrage.montant_recu| number :
-      "1.0-0" : "fr-FR"}} FCFA</ion-badge>
+    <ion-badge class="badge bg-danger-subtle text-danger-emphasis w-auto">Reste : {{chiffrage.reste_a_payer| countUp:1500}} FCFA</ion-badge>
+    <ion-badge class="badge bg-success-subtle text-success-emphasis w-auto">Reçu : {{chiffrage.montant_recu| countUp:1500}} FCFA</ion-badge>
   </div>
 
   <div class="d-flex justify-content-between align-items-center mb-1">

@@ -5,13 +5,14 @@ import { ModalController, IonList, IonItem, IonLabel, IonButton, IonBadge, IonIt
 import { ApiService } from '../service/api/api.service';
 import { AddAcomptesComponent } from '../components/components/acomptes/add-acomptes/add-acomptes.component';
 import { EditAcomptesComponent } from '../components/components/acomptes/edit-acomptes/edit-acomptes.component';
+import { CountUpPipe } from "../pipes/count-up-pipe";
 
 @Component({
   selector: 'app-acomptes',
   templateUrl: './acomptes.page.html',
   styleUrls: ['./acomptes.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions]
+  imports: [CommonModule, FormsModule, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions, CountUpPipe]
 })
 export class AcomptesPage implements OnInit {
 
