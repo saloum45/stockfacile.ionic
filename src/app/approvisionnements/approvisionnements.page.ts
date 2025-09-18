@@ -3,19 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
-import { ModalController, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions ,IonFab,IonFabButton} from '@ionic/angular/standalone';
+import { ModalController, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { CountUpPipe } from "../pipes/count-up-pipe";
+import { DetailApprovisionnementComponent } from '../components/components/approvisionnements/detail-approvisionnement-component/detail-approvisionnement-component';
 
 @Component({
   selector: 'app-approvisionnements',
   templateUrl: './approvisionnements.page.html',
   styleUrls: ['./approvisionnements.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, CountUpPipe, IonList, IonItem, IonLabel,IonFab,IonFabButton]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, CountUpPipe, IonList, IonItem, IonLabel, IonFab, IonFabButton]
 })
 export class ApprovisionnementsPage implements OnInit {
 
-loading_get_approvisionnements = false
+  loading_get_approvisionnements = false
   approvisionnements: any[] = []
   selected_approvisionnements: any = undefined
   approvisionnements_to_edit: any = undefined
@@ -31,7 +32,7 @@ loading_get_approvisionnements = false
   };
 
 
-  constructor(public api: ApiService, private modalService:ModalController ) {
+  constructor(public api: ApiService, private modalService: ModalController) {
 
   }
   ngOnInit(): void {
@@ -127,28 +128,26 @@ loading_get_approvisionnements = false
     }, 0);
   }
 
-  openModal_detail_approvisionnements(one_approvisionnements: any) {
-    // let options: any = {
-    //   centered: true,
-    //   scrollable: true,
-    //   size: "xl"//'sm' | 'lg' | 'xl' | string
-    // }
-    // const modalRef = this.modalService.open(DetailApprovisionnementComponent, { ...options, backdrop: 'static', })
-    // modalRef.componentInstance.approvisionnements_to_view = one_approvisionnements;
-    // modalRef.result.then((result: any) => {
-    //   console.log('Modal closed with:', result);
-    //   if (result?.status_code) {
-    //     this.get_approvisionnements()
-    //   } else {
+  async openModal_detail_approvisionnements(one_approvisionnements: any) {
+    const modal = await this.modalService.create({
+      component: DetailApprovisionnementComponent,
+      componentProps: {
+        approvisionnements_to_view: one_approvisionnements
+      }
+    });
+    modal.present();
 
-    //   }
-    //    this.approvisionnementsFiltres = this.approvisionnementsFiltres.map((item:any) =>
-    //     item.id === result.id ? result : item
-    //   );
-    //   this.approvisionnements = this.approvisionnements.map((item:any) =>
-    //     item.id === result.id ? result : item
-    //   );
-    // })
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      this.get_approvisionnements()
+    }
+    this.approvisionnementsFiltres = this.approvisionnementsFiltres.map((item: any) =>
+      item.id === data.id ? data : item
+    );
+    this.approvisionnements = this.approvisionnements.map((item: any) =>
+      item.id === data.id ? data : item
+    );
   }
 
   // Réinitialise les filtres de dates quand on change de type

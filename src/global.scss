@@ -165,4 +165,13 @@ label {
   font-weight: bold;
 }
 
-// body
+// Details
+
+.header-card {
+  .vente-date,
+  .vente-client {
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0;
+  }
+}

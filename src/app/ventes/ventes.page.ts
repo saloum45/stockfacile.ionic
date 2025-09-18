@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, ModalController, IonFab, IonFabButton,IonBadge } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, ModalController, IonFab, IonFabButton, IonBadge } from '@ionic/angular/standalone';
 import { AddVentesComponent } from '../components/components/ventes/add-ventes/add-ventes.component';
 // import { DetailVentesComponents } from '../components/components/ventes/detail-ventes-components/detail-ventes-components';
 import { EditVentesComponent } from '../components/components/ventes/edit-ventes/edit-ventes.component';
@@ -135,13 +135,13 @@ export class VentesPage implements OnInit {
       // this.service.successMessage("Commande ajoutée");
       // this.get_ventes()
     }
-      this.list = this.list.map((item: any) =>
-        item.id === data.id ? data : item
-      );
-      this.ventes = this.ventes.map((item: any) =>
-        item.id === data.id ? data : item
-      );
-      this.filtrer();
+    this.list = this.list.map((item: any) =>
+      item.id === data.id ? data : item
+    );
+    this.ventes = this.ventes.map((item: any) =>
+      item.id === data.id ? data : item
+    );
+    this.filtrer();
   }
 
   // Méthode pour filtrer

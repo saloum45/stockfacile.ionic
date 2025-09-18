@@ -1,0 +1,53 @@
+<ion-header [translucent]="true" class="shadow-none">
+  <ion-toolbar>
+    <ion-chip (click)="modalService.dismiss(this.approvisionnements_to_view)">
+      <i class="bi bi-x-circle"></i>
+      <!--   -->
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="vente-detail-content ion-padding">
+  <!-- Section entête -->
+  <div class="header-card bg-white rounded rounded-4 p-2 text-center">
+    <h2 class="text-primary-base fw-bold">Appro #{{ approvisionnements_to_view?.id }}</h2>
+    <p class="vente-date">
+      <i class="bi bi-calendar-event me-1"></i>
+      {{ approvisionnements_to_view?.date | date:'d MMMM yyyy' }} à {{ approvisionnements_to_view?.created_at |
+      date:'HH:mm' }}
+    </p>
+    <p class="vente-client">
+      <i class="bi bi-truck me-1"></i>
+      {{ approvisionnements_to_view?.fournisseur?.nom_fournisseur || 'Non spécifié' }}
+    </p>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <ion-badge
+        [ngClass]="approvisionnements_to_view?.etat_approvisionnement?.id === 2 ? 'text-success-emphasis bg-success-subtle' : 'text-danger-emphasis bg-danger-subtle'">
+        {{ approvisionnements_to_view?.etat_approvisionnement?.libelle_etat_approvisionnement || 'En attente' }}
+      </ion-badge>
+      <ion-badge class="text-success-emphasis bg-success-subtle">
+        {{ getTotal(approvisionnements_to_view?.detail_approvisionnements) | number:'':'fr' }} FCFA
+      </ion-badge>
+    </div>
+  </div>
+<!-- Liste des produits -->
+  <ion-list class="rounded rounded-3 bg-transparent">
+    <span class="fs-5">Produits</span>
+    <ng-container *ngIf="approvisionnements_to_view?.detail_approvisionnements?.length;">
+      @for (detail of approvisionnements_to_view.detail_approvisionnements; track $index) {
+      <ion-item class="header-card bg-white rounded rounded-4 mb-2">
+        <ion-label class="ion-text-wrap">
+          <h4 class="fw-bold text-primary-base">{{ detail.produit?.libelle_produit || 'Produit inconnu' }}</h4>
+          <p>Quantité : <strong>{{ detail.quantite }}</strong></p>
+          <p>Prix unitaire : {{ detail.prix_achat | number:'':'fr' }} FCFA</p>
+          <p>Entrepôt : {{ detail.rangement?.entrepot?.libelle_entrepot || 'N/A' }}</p>
+          <p>Rangement : {{ detail.rangement?.libelle_rangement || '-' }}</p>
+        </ion-label>
+        <p class="text-primary-base">
+          {{ (detail.quantite * detail.prix_achat) | number:'':'fr' }} FCFA
+        </p>
+      </ion-item>
+      }
+    </ng-container>
+  </ion-list>
+</ion-content>
