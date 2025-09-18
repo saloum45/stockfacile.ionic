@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
-import { ModalController, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions } from '@ionic/angular/standalone';
+import { ModalController, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions ,IonFab,IonFabButton} from '@ionic/angular/standalone';
+import { CountUpPipe } from "../pipes/count-up-pipe";
 
 @Component({
   selector: 'app-approvisionnements',
   templateUrl: './approvisionnements.page.html',
   styleUrls: ['./approvisionnements.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, CountUpPipe, IonList, IonItem, IonLabel,IonFab,IonFabButton]
 })
 export class ApprovisionnementsPage implements OnInit {
 
@@ -23,7 +24,7 @@ loading_get_approvisionnements = false
   approvisionnementsFiltres: any[] = [];
   filter = {
     typeFiltre: 'periode', // ou 'dates'
-    periode: 'aujourd\'hui',
+    periode: '',
     dateDebut: '',
     dateFin: '',
     text: ''
