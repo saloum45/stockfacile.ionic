@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent,IonHeader,IonToolbar,IonTitle,IonList,IonCard,IonCardHeader,IonCardTitle,IonItem,IonLabel,IonSkeletonText,IonAccordion,IonAccordionGroup,IonCardContent,IonBadge } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
+import { CountUpPipe } from "../pipes/count-up-pipe";
 
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.page.html',
   styleUrls: ['./stock.page.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule,IonContent,IonHeader,IonToolbar,IonTitle,IonList,IonCard,IonCardHeader,IonCardTitle,IonItem,IonLabel,IonSkeletonText,IonAccordion,IonAccordionGroup,IonCardContent,IonBadge]
+  imports: [CommonModule, FormsModule, IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonCard, IonCardHeader, IonCardTitle, IonItem, IonLabel, IonSkeletonText, IonAccordion, IonAccordionGroup, IonCardContent, IonBadge, CountUpPipe]
 })
 export class StockPage implements OnInit {
 
