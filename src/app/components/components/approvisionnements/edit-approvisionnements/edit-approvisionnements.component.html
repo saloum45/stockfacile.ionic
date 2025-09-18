@@ -1,0 +1,177 @@
+<ion-header [translucent]="true" class="shadow-none">
+  <ion-toolbar>
+    <ion-chip (click)="activeModal.dismiss()">
+      <i class="bi bi-x-circle"></i>
+
+    </ion-chip>
+    <ion-chip slot="end" class="validate-button" [disabled]="
+      loading_get_details_edit_approvisionnements_form ||
+      loading_get_details_edit_approvisionnements_form ||reactiveForm_edit_approvisionnements.pristine
+    " (click)="form_edit_approvisionnements.ngSubmit.emit()">
+      <ion-label>Valider</ion-label>
+      <i class="bi bi-check2-circle ms-1"></i>
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="reactiveForm_edit_approvisionnements" (ngSubmit)="onSubmit_edit_approvisionnements()"
+    #form_edit_approvisionnements="ngForm" class="row">
+    <!-- Informations générales -->
+    <div class="row g-3 mb-4">
+      <!-- Date -->
+      <div class="col-12 col-md-6">
+        <label class="form-label fw-semibold">Date <span class="text-danger">*</span></label>
+        <input type="date" class="form-control form-control-lg" formControlName="date"
+          [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
+        @if (submitted && f.date.errors?.required) {
+        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
+        }
+      </div>
+
+      <!-- Etat Approvisionnement -->
+      <div class="col-12 col-md-6">
+        <label class="form-label fw-semibold">État <span class="text-danger">*</span></label>
+        <ng-select class="form-control" formControlName="id_etat_approvisionnement" [ngClass]="{
+          'is-invalid': submitted && f.id_etat_approvisionnement.errors
+        }" [items]="form_details.etatApprovisionnements" bindLabel="libelle_etat_approvisionnement" bindValue="id"
+          [placeholder]="'Veuillez selectionner un état'" appendTo="body" clearable="true"
+          [placeholder]="'Sélectionnez une catégories'" [loading]="loading_get_details_edit_approvisionnements_form"
+          notFoundText="Aucun client trouvé">
+        </ng-select>
+        @if (submitted && f.id_etat_approvisionnement.errors?.required) {
+        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
+        }
+      </div>
+
+      <!-- Fournisseur -->
+      <div class="col-12 col-md-12">
+        <label class="form-label fw-semibold">Fournisseur <span class="text-danger">*</span></label>
+        <ng-select class="form-control" formControlName="id_fournisseur"
+          [ngClass]="{ 'is-invalid': submitted && f.id_fournisseur.errors }" [items]="form_details?.fournisseurs"
+          bindLabel="nom_fournisseur" bindValue="id" appendTo="body" clearable="true"
+          [placeholder]="'Veuillez selectionner un fournisseur'"
+          [loading]="loading_get_details_edit_approvisionnements_form" notFoundText="Aucun client trouvé">
+        </ng-select>
+        @if (submitted && f.id_fournisseur.errors?.required) {
+        <div class="invalid-feedback d-block">Ce champ est obligatoire</div>
+        }
+      </div>
+    </div>
+
+    <!-- Détails des produits -->
+    <h5 class="mt-4 mb-3 text-secondary d-flex align-items-center">
+      <i class="bi bi-box-seam me-2"></i>
+      Détails des produits
+    </h5>
+
+    <div formArrayName="les_details" class="details-container">
+      @for (detail of les_details.controls; track $index; let i = $index) {
+      <div [formGroupName]="i" class="card mb-3 shadow-sm border-light animate__animated animate__fadeIn">
+        <!-- Bouton Supprimer en haut à droite -->
+        <button type="button" class="btn btn-close btn-close-danger position-absolute top-0 end-0 m-2"
+          (click)="remove_detail(i)" [disabled]="les_details.length === 1" aria-label="Supprimer ce produit"></button>
+        <div class="card-body p-3">
+          <div class="row g-2">
+            <!-- Produit -->
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Produit <span class="text-danger">*</span></label>
+              <ng-select class="form-control" formControlName="id_produit" [ngClass]="{
+                  'is-invalid': submitted && detail.get('id_produit')?.errors
+                }" [items]="form_details?.produits" (change)="on_produit_selected($event,i)"
+                bindLabel="libelle_produit" bindValue="id" appendTo="body" clearable="true"
+                [placeholder]="'Veuillez selectionner un produit'"
+                [loading]="loading_get_details_edit_approvisionnements_form" notFoundText="Aucun client trouvé">
+
+              </ng-select>
+              @if (submitted && detail.get('id_produit')?.errors?.['required'])
+              {
+              <div class="invalid-feedback d-block">Obligatoire</div>
+              }
+            </div>
+
+            <!-- Quantité -->
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Quantité <span class="text-danger">*</span></label>
+              <input type="number" class="form-control" formControlName="quantite" placeholder="0" [ngClass]="{
+                  'is-invalid': submitted && detail.get('quantite')?.errors
+                }" />
+              @if (submitted && detail.get('quantite')?.errors?.['required']) {
+              <div class="invalid-feedback d-block">Obligatoire</div>
+              }
+            </div>
+
+            <!-- Prix d'achat -->
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Prix </label>
+              <input type="number" class="form-control" formControlName="prix_achat" placeholder="0.00" step="0.01"
+                [ngClass]="{
+                  'is-invalid': submitted && detail.get('prix_achat')?.errors
+                }" />
+              @if (submitted && detail.get('prix_achat')?.errors?.['required'])
+              {
+              <div class="invalid-feedback d-block">Obligatoire</div>
+              }
+            </div>
+
+          </div>
+
+          <div class="row g-2">
+            <!-- Entrepôt -->
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Entrepôt <span class="text-danger">*</span></label>
+              <ng-select class="form-control" formControlName="id_entrepot" [ngClass]="{
+                'is-invalid': submitted && detail.get('id_entrepot')?.errors
+              }" [items]="form_details?.entrepot_rangements" bindLabel="libelle_entrepot" bindValue="id"
+                appendTo="body" clearable="true" [placeholder]="'Veuillez selectionner un entrepot'"
+                (change)="update_rangement($event, i)" [loading]="loading_get_details_edit_approvisionnements_form"
+                notFoundText="Aucun client trouvé">
+
+              </ng-select>
+              @if (submitted &&
+              detail.get('id_entrepot')?.errors?.['required']) {
+              <div class="invalid-feedback d-block">Obligatoire</div>
+              }
+            </div>
+
+            <!-- Rangement -->
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Rangement <span class="text-danger">*</span></label>
+              <ng-select class="form-control" formControlName="id_rangement" [ngClass]="{
+                  'is-invalid': submitted && detail.get('id_rangement')?.errors
+                }" [items]="rangementsParDetail[i]" bindLabel="libelle_rangement" bindValue="id" appendTo="body"
+                clearable="true" [placeholder]="'Veuillez selectionner un rangement'"
+                [loading]="loading_get_details_edit_approvisionnements_form" notFoundText="Aucun client trouvé">
+              </ng-select>
+              @if (submitted &&
+              detail.get('id_rangement')?.errors?.['required']) {
+              <div class="invalid-feedback d-block">Obligatoire</div>
+              }
+            </div>
+
+            <!-- Date péremption -->
+            <div class="col-12 col-md-4">
+              <label class="form-label small fw-medium">Date péremption</label>
+              <input type="date" class="form-control" formControlName="date_peremption" [ngClass]="{
+                  'is-invalid':
+                    submitted && detail.get('date_peremption')?.errors
+                }" />
+              @if (submitted &&
+              detail.get('date_peremption')?.errors?.['required']) {
+              <div class="invalid-feedback d-block">Obligatoire</div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Bouton Ajouter -->
+      <div class="text-center my-3">
+        <button type="button" class="btn btn-outline-primary px-4 py-2" (click)="add_detail()">
+          <i class="bi bi-plus-circle me-1"></i>
+          Ajouter un produit
+        </button>
+      </div>
+    </div>
+  </form>
+</ion-content>

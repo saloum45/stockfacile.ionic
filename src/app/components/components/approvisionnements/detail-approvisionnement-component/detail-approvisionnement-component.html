@@ -50,4 +50,16 @@
       }
     </ng-container>
   </ion-list>
+
+   <!-- IonFab -->
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button style="--background:var(--base-color);">
+      <i class="bi bi-info-circle fs-4"></i>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button style="--background:var(--base-color);--color:white" (click)="openModal_edit_approvisionnements(approvisionnements_to_view)">
+        <i class="bi bi-pencil-square"></i>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

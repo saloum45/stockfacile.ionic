@@ -1,12 +1,13 @@
- import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ApiService } from 'src/app/service/api/api.service';
 // import { EditApprovisionnementsComponent } from '../edit-approvisionnements/edit-approvisionnements.component';
-import { ModalController,IonContent,IonToolbar,IonChip,IonHeader, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions ,IonFab,IonFabButton} from '@ionic/angular/standalone';
+import { ModalController, IonContent, IonToolbar, IonChip, IonHeader, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
+import { EditApprovisionnementsComponent } from '../edit-approvisionnements/edit-approvisionnements.component';
 @Component({
   selector: 'app-detail-approvisionnement-component',
   standalone: true,
-  imports: [DatePipe, DecimalPipe,IonContent,IonToolbar,IonChip,IonHeader, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions ,IonFab,IonFabButton,CommonModule],
+  imports: [DatePipe, DecimalPipe, IonContent, IonToolbar, IonChip, IonHeader, IonList, IonItem, IonLabel, IonButton, IonBadge, IonItemSliding, IonItemOption, IonItemOptions, IonFab, IonFabButton, CommonModule, IonFabList],
   templateUrl: './detail-approvisionnement-component.html',
   styleUrl: './detail-approvisionnement-component.scss'
 })
@@ -31,7 +32,7 @@ export class DetailApprovisionnementComponent {
     }, 0);
   }
 
-  openModal_edit_approvisionnements(one_approvisionnements: any) {
+  async openModal_edit_approvisionnements(one_approvisionnements: any) {
     // let options: any = {
     //   centered: true,
     //   scrollable: true,
@@ -48,5 +49,19 @@ export class DetailApprovisionnementComponent {
     //   }
     //   this.approvisionnements_to_view=result.data[0]
     // })
+    const modal = await this.modalService.create({
+      component: EditApprovisionnementsComponent,
+      componentProps: {
+        approvisionnements_to_edit: one_approvisionnements
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (data?.status_code) {
+      // this.get_approvisionnements()
+    }
+    this.approvisionnements_to_view = data.data[0]
   }
 }
