@@ -11,12 +11,13 @@ import { VentesParHeure } from '../components/dashboards/ventes-par-heure/ventes
 import { AlertesStock } from '../components/dashboards/alertes-stock/alertes-stock';
 import { TopProduitVendu } from '../components/dashboards/top-produit-vendu/top-produit-vendu';
 import { IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonCol,IonRow,IonInput } from '@ionic/angular/standalone';
+import { CountUpPipe } from "../pipes/count-up-pipe";
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.page.html',
   styleUrls: ['./accueil.page.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule, EvolutionVenteAchat, Benefice, ModePaiement, VentesParHeure, AlertesStock, TopProduitVendu, IonContent,IonButton,IonTitle,IonHeader,IonToolbar,IonCol,IonRow,IonInput ]
+  imports: [CommonModule, FormsModule, EvolutionVenteAchat, Benefice, ModePaiement, VentesParHeure, AlertesStock, TopProduitVendu, IonContent, IonButton, IonTitle, IonHeader, IonToolbar, IonCol, IonRow, IonInput, CountUpPipe]
 })
 export class AccueilPage implements OnInit {
 
