@@ -7,6 +7,7 @@ import { AddVentesComponent } from '../components/components/ventes/add-ventes/a
 import { EditVentesComponent } from '../components/components/ventes/edit-ventes/edit-ventes.component';
 import { ApiService } from '../service/api/api.service';
 import { DetailVentesComponents } from '../components/components/ventes/detail-ventes-components/detail-ventes-components';
+import { CountUpPipe } from "../pipes/count-up-pipe";
 
 
 @Component({
@@ -14,7 +15,7 @@ import { DetailVentesComponents } from '../components/components/ventes/detail-v
   templateUrl: './ventes.page.html',
   styleUrls: ['./ventes.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonContent, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, IonFab, IonFabButton,IonBadge]
+  imports: [CommonModule, FormsModule, IonContent, IonTitle, IonHeader, IonToolbar, IonList, IonItem, IonLabel, IonFab, IonFabButton, IonBadge, CountUpPipe]
 })
 export class VentesPage implements OnInit {
 

@@ -6,10 +6,8 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="d-flex justify-content-between rounded my-2 ">
-    <ion-badge class="badge bg-danger-subtle text-danger-emphasis w-auto">Reste : {{chiffrage.dette| number :
-      "1.0-0" : "fr-FR"}} FCFA</ion-badge>
-    <ion-badge class="badge bg-success-subtle text-success-emphasis w-auto">Reçu : {{chiffrage.acompte| number :
-      "1.0-0" : "fr-FR"}} FCFA</ion-badge>
+    <ion-badge class="badge bg-danger-subtle text-danger-emphasis w-auto">Reste : {{chiffrage.dette| countUp:1500}} FCFA</ion-badge>
+    <ion-badge class="badge bg-success-subtle text-success-emphasis w-auto">Reçu : {{chiffrage.acompte| countUp:1500}} FCFA</ion-badge>
   </div>
   <div class="tabs-choises d-flex justify-content-between p-2 mb-3 m-auto ">
     <button (click)="tabs_choice_change(1)" [ngClass]="{'tabs-choises_button_active':tabs_choice==1}">Toutes</button>

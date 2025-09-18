@@ -6,13 +6,14 @@ import { ApiService } from '../service/api/api.service';
 import { AddClientsComponent } from '../components/components/clients/add-clients/add-clients.component';
 import { EditClientsComponent } from '../components/components/clients/edit-clients/edit-clients.component';
 import { DetailsClient } from '../components/components/clients/details-client/details-client';
+import { CountUpPipe } from "../pipes/count-up-pipe";
 
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.page.html',
   styleUrls: ['./clients.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonItemOption, IonItemOptions, IonItemSliding, IonFab, IonFabButton, FormsModule, IonBadge]
+  imports: [CommonModule, IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, IonItemOption, IonItemOptions, IonItemSliding, IonFab, IonFabButton, FormsModule, IonBadge, CountUpPipe]
 })
 export class ClientsPage implements OnInit {
 

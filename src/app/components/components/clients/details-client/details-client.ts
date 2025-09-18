@@ -5,10 +5,11 @@ import { ApiService } from 'src/app/service/api/api.service';
 import { DetailVentesComponents } from '../../ventes/detail-ventes-components/detail-ventes-components';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonToolbar, ModalController, IonLabel, IonChip, IonList, IonItem, IonBadge } from '@ionic/angular/standalone';
+import { CountUpPipe } from "../../../../pipes/count-up-pipe";
 
 @Component({
   selector: 'app-details-client',
-  imports: [CommonModule, FormsModule, IonContent, IonHeader, IonToolbar, IonLabel, IonChip, IonList, IonItem, IonBadge],
+  imports: [CommonModule, FormsModule, IonContent, IonHeader, IonToolbar, IonLabel, IonChip, IonList, IonItem, IonBadge, CountUpPipe],
   templateUrl: './details-client.html',
   styleUrl: './details-client.scss'
 })

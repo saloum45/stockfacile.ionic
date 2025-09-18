@@ -12,10 +12,8 @@
   </ion-header> -->
   <!-- Somme totale  -->
   <div class="d-flex justify-content-between rounded my-2 ">
-    <ion-badge class="badge bg-danger-subtle text-danger-emphasis w-auto">Reste : {{chiffrage.dette| number :
-      "1.0-0" : "fr-FR"}} FCFA</ion-badge>
-    <ion-badge class="badge bg-success-subtle text-success-emphasis w-auto">Reçu : {{chiffrage.acompte| number :
-      "1.0-0" : "fr-FR"}} FCFA</ion-badge>
+    <ion-badge class="badge bg-danger-subtle text-danger-emphasis w-auto">Reste : {{chiffrage.dette| countUp:1500}} FCFA</ion-badge>
+    <ion-badge class="badge bg-success-subtle text-success-emphasis w-auto">Reçu : {{chiffrage.acompte| countUp:1500}} FCFA</ion-badge>
   </div>
   <div class="d-flex w-100 mb-2">
     <div class="tabs-choises d-flex justify-content-between p-2 m-auto w-100">
