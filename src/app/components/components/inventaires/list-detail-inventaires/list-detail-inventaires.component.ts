@@ -3,12 +3,12 @@ import { ApiService } from '../../../../service/api/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonFab, IonFabButton, IonList, IonItemSliding, IonItem, IonLabel, IonItemOption, IonItemOptions, IonButton, IonBadge,IonChip,IonFabList,IonSkeletonText,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonIcon,IonSelectOption,IonAccordion,IonAccordionGroup } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonFab, IonFabButton, IonList, IonItemSliding, IonItem, IonLabel, IonItemOption, IonItemOptions, IonButton, IonBadge,IonChip,IonFabList,IonSkeletonText,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonIcon,IonSelectOption,IonAccordion,IonAccordionGroup ,IonNote,IonItemDivider,IonText} from '@ionic/angular/standalone';
 import { CountUpPipe } from "../../../../pipes/count-up-pipe";
 @Component({
   selector: 'app-list-detail-inventaires',
   standalone: true, // Composant autonome
-  imports: [CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonList, IonItemSliding, IonItem, IonLabel, IonItemOption, IonItemOptions, IonButton, IonBadge, IonChip, CountUpPipe,IonFabList,IonSkeletonText,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonIcon,IonSelectOption,IonAccordion,IonAccordionGroup], // Dépendances importées
+  imports: [CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonList, IonItemSliding, IonItem, IonLabel, IonItemOption, IonItemOptions, IonButton, IonBadge, IonChip, CountUpPipe,IonFabList,IonSkeletonText,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonIcon,IonSelectOption,IonAccordion,IonAccordionGroup,IonNote,IonItemDivider,IonText], // Dépendances importées
   templateUrl: './list-detail-inventaires.component.html',
   styleUrls: ['./list-detail-inventaires.component.scss']
 })
