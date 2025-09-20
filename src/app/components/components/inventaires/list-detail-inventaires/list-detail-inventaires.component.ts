@@ -3,11 +3,12 @@ import { ApiService } from '../../../../service/api/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonFab, IonFabButton, IonList, IonItemSliding, IonItem, IonLabel, IonItemOption, IonItemOptions, IonButton, IonBadge } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonFab, IonFabButton, IonList, IonItemSliding, IonItem, IonLabel, IonItemOption, IonItemOptions, IonButton, IonBadge,IonChip,IonFabList } from '@ionic/angular/standalone';
+import { CountUpPipe } from "../../../../pipes/count-up-pipe";
 @Component({
   selector: 'app-list-detail-inventaires',
   standalone: true, // Composant autonome
-  imports: [CommonModule, FormsModule], // Dépendances importées
+  imports: [CommonModule, FormsModule, IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonList, IonItemSliding, IonItem, IonLabel, IonItemOption, IonItemOptions, IonButton, IonBadge, IonChip, CountUpPipe,IonFabList], // Dépendances importées
   templateUrl: './list-detail-inventaires.component.html',
   styleUrls: ['./list-detail-inventaires.component.scss']
 })
@@ -31,7 +32,7 @@ export class ListDetailInventairesComponent {
   };
   list: any = [];
   valeur_stock=0;
-  constructor(public api: ApiService, private modalService: ModalController) {
+  constructor(public api: ApiService, public modalService: ModalController) {
     // this.id_inventaire = this.route.snapshot.params['id']
   }
   ngOnInit(): void {
