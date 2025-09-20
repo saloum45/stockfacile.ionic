@@ -43,6 +43,10 @@ export const routes: Routes = [
       {
         path: 'approvisionnements',
         loadComponent: () => import('../approvisionnements/approvisionnements.page').then(m => m.ApprovisionnementsPage)
+      },
+      {
+        path: 'inventaires',
+        loadComponent: () => import('../inventaires/inventaires.page').then(m => m.InventairesPage)
       }
     ],
   },
