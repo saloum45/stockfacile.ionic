@@ -1,0 +1,214 @@
+<div
+  class="d-flex align-items-center justify-content-between  bg-white shadow-sm p-4 rounded rounded-2 mb-4 border border-1">
+  <div class="d-flex  align-items-center">
+    <i class="bi bi-arrow-left text-secondary fs-3 me-2" (click)="api.retour()"></i>
+    <div class="fs-5">Inventaire du
+      <!-- <span class="text-primary-base-base fw-bold"> {{api.format_date(inventaire?.date).jma2}}</span> -->
+      <span class="text-primary-base-base fw-bold"> {{ inventaire?.created_at | date : "d MMMM yyyy" }} à {{
+        inventaire?.created_at | date : "HH:mm"}}</span>
+      @if (inventaire?.date_heure_cloture) {
+      au
+      <span class="text-primary-base-base fw-bold"> {{ inventaire?.date_heure_cloture | date : "d MMMM yyyy" }} à {{
+        inventaire?.date_heure_cloture | date : "HH:mm"}}</span>
+      }
+
+    </div>
+  </div>
+  <div class="d-flex">
+    <button class="btn btn-primary" (click)="cloturer_inventaire()" [disabled]="this.inventaire?.cloture"><i
+        class="bi bi-plus-square-dotted"></i>
+      {{(this.inventaire?.cloture)?"Déja Clôturé":"Clôturer l'inventaire"}}
+
+    </button>
+  </div>
+</div>
+<!-- Liste des éléments -->
+ <!-- Valorisation -->
+<div class="bg-white rounded-2 mb-4 p-3 shadow-sm d-flex justify-content-between align-items-center">
+  <div class="d-flex align-items-center">
+    <i class="bi bi-box-seam me-2 text-primary-base" style="font-size: 1.5rem;"></i>
+    <span class="fw-bold text-primary-base">Valorisation du Stock</span>
+  </div>
+  <span class="badge bg-success-subtle text-success-emphasis fs-5 px-3 py-2 ">{{valeur_stock| number : "1.0-0" : "fr-FR"}} F CFA</span>
+</div>
+<!-- Card filtres -->
+<div class="bg-white rounded-2 mb-4 p-3 shadow-sm">
+  <!-- Barre de filtres améliorée -->
+  <div class="">
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+      <input type="text" class="form-control" placeholder="Rechercher par produit, par catégorie..."
+        [(ngModel)]="filter.text" (input)="filtrer()" />
+    </div>
+  </div>
+</div>
+<!-- Loading state -->
+<ng-container *ngIf="loading_get_detail_inventaires">
+  <div class="text-center py-5">
+    <div class="spinner-border text-primary-base" role="status">
+      <span class="visually-hidden">Chargement en cours...</span>
+    </div>
+    <p class="mt-2 text-muted fs-5">Chargement en cours...</p>
+  </div>
+</ng-container>
+<!-- contenu sous format carte -->
+<table class="table table-bordered mt-4 rounded rounded-1" *ngIf="!loading_get_detail_inventaires">
+  <thead>
+    <tr>
+      <th scope="col" rowspan="2">Produit</th>
+      <th scope="col" rowspan="2" class="text-center">Entrepôt</th>
+      <th scope="col" rowspan="2" class="text-center">Rangement</th>
+      <th scope="col" colspan="2" class="text-center">Stock</th>
+    </tr>
+    <tr>
+      <th scope="col" class="text-center">Théorique</th>
+      <th scope="col" class="text-center">Réel</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (one_stock of list; track one_stock; let premier_stock=$first; let index=$index) {
+    @if ((one_stock.entrepots?.length || 0) === 0) {
+    <!-- Cas: aucun entrepôt (affiche le nom du produit et bouton +) -->
+    <tr>
+      <td scope="row">
+        <span class="fw-bold text-muted">{{ one_stock.libelle_produit }}</span>
+      </td>
+      <td colspan="4">
+        <div>
+          <i *ngIf="!this.inventaire?.cloture" class="bi bi-plus-square-dotted fs-5 cursor-pointer"
+            (click)="one_stock.showAddEntrepotSelect = !one_stock.showAddEntrepotSelect"></i>
+
+          <div *ngIf="one_stock.showAddEntrepotSelect" class="mt-2">
+            <select class="form-select form-select-sm" [(ngModel)]="one_stock.selectedEntrepotId"
+              (change)="ajouterEntrepot(one_stock)">
+              <option [ngValue]="null">-- Choisir un entrepôt --</option>
+              <option *ngFor="let entrepot of form_details?.entrepot_rangements" [ngValue]="entrepot.id"
+                [disabled]="api.is_already_selected(entrepot.id, one_stock.entrepots, 'id')">
+                {{ entrepot.libelle_entrepot }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </td>
+    </tr>
+    }
+
+    @for (one_entrepot of one_stock.entrepots; track one_entrepot; let premier_entrepot=$first; let
+    dernier_entrepot=$last) {
+    @if ((one_entrepot.rangements?.length || 0) === 0) {
+    <!-- Cas: entrepôt sans rangement -->
+    <tr>
+      <td *ngIf="premier_entrepot">
+        <span class="fw-bold text-muted">{{ one_stock.libelle_produit }}</span>
+      </td>
+      <td>
+        {{ one_entrepot.nom }}
+        <div *ngIf="dernier_entrepot">
+          <i *ngIf="!this.inventaire?.cloture" class="bi bi-plus-square-dotted fs-5 cursor-pointer"
+            (click)="one_stock.showAddEntrepotSelect = !one_stock.showAddEntrepotSelect"></i>
+          <div *ngIf="one_stock.showAddEntrepotSelect" class="mt-2">
+            <select class="form-select form-select-sm" [(ngModel)]="one_stock.selectedEntrepotId"
+              (change)="ajouterEntrepot(one_stock)">
+              <option [ngValue]="null">-- Choisir un entrepôt --</option>
+              <option *ngFor="let entrepot of form_details?.entrepot_rangements" [ngValue]="entrepot.id"
+                [disabled]="api.is_already_selected(entrepot.id, one_stock.entrepots, 'id')">
+                {{ entrepot.libelle_entrepot }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td colspan="3">
+        <i *ngIf="!this.inventaire?.cloture" class="bi bi-plus-square-dotted fs-5 cursor-pointer"
+          (click)="one_entrepot.showAddRangementSelect = !one_entrepot.showAddRangementSelect"></i>
+        <div *ngIf="one_entrepot.showAddRangementSelect" class="mt-2">
+          <select class="form-select form-select-sm" [(ngModel)]="one_entrepot.selectedRangementId"
+            (change)="ajouterRangement(one_entrepot, one_stock)">
+            <option [ngValue]="null">-- Choisir un rangement --</option>
+            <option *ngFor="let rangement of get_entrepot_rangements(one_entrepot.id)" [ngValue]="rangement.id"
+              [disabled]="api.is_already_selected(rangement.id, one_entrepot.rangements, 'id')">
+              {{ rangement.libelle_rangement }}
+            </option>
+          </select>
+        </div>
+      </td>
+    </tr>
+    }
+
+    @for (one_rangement of one_entrepot.rangements; track one_rangement; let premier_rangement=$first; let
+    dernier_rangement=$last) {
+    <tr>
+      <td *ngIf="premier_entrepot && premier_rangement" [rowSpan]="one_stock.nombre_rangement">
+        <span class="fw-bold text-muted">{{ one_stock.libelle_produit }}</span>
+      </td>
+      <td *ngIf="premier_rangement" [rowSpan]="one_entrepot.rangements.length || 1">
+        <div class="w-100 d-flex justify-content-between">
+          <span>{{ one_entrepot.nom }}</span>
+        </div>
+        <div *ngIf="dernier_entrepot">
+          <i *ngIf="!this.inventaire?.cloture" class="bi bi-plus-square-dotted fs-5 cursor-pointer"
+            (click)="one_stock.showAddEntrepotSelect = !one_stock.showAddEntrepotSelect"></i>
+          <div *ngIf="one_stock.showAddEntrepotSelect" class="mt-2">
+            <select class="form-select form-select-sm" [(ngModel)]="one_stock.selectedEntrepotId"
+              (change)="ajouterEntrepot(one_stock)">
+              <option [ngValue]="null">-- Choisir un entrepôt --</option>
+              <option *ngFor="let entrepot of form_details?.entrepot_rangements" [ngValue]="entrepot.id"
+                [disabled]="api.is_already_selected(entrepot.id, one_stock.entrepots, 'id')">
+                {{ entrepot.libelle_entrepot }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="w-100 d-flex justify-content-between align-items-center">
+          <span>{{ one_rangement.nom }}</span>
+          <i *ngIf="one_rangement.deja_inventaire" class="bi bi-check2-circle fs-4 text-success-emphasis"></i>
+        </div>
+        <div *ngIf="dernier_rangement">
+          <i *ngIf="!this.inventaire?.cloture" class="bi bi-plus-square-dotted fs-5 cursor-pointer"
+            (click)="one_entrepot.showAddRangementSelect = !one_entrepot.showAddRangementSelect"></i>
+          <div *ngIf="one_entrepot.showAddRangementSelect" class="mt-2">
+            <select class="form-select form-select-sm" [(ngModel)]="one_entrepot.selectedRangementId"
+              (change)="ajouterRangement(one_entrepot, one_stock)">
+              <option [ngValue]="null">-- Choisir un rangement --</option>
+              <option *ngFor="let rangement of get_entrepot_rangements(one_entrepot.id)" [ngValue]="rangement.id"
+                [disabled]="api.is_already_selected(rangement.id, one_entrepot.rangements, 'id')">
+                {{ rangement.libelle_rangement }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="w-100 text-center">
+          <span class="badge bg-success-subtle text-success-emphasis w-50">{{ one_rangement.quantite }}</span>
+        </div>
+      </td>
+      <td>
+        <div class="w-100 d-flex justify-content-center">
+          <input class="form-control text-center" style="width: 100px;" type="text"
+            [(ngModel)]="one_rangement.quantite_reelle" [disabled]="this.inventaire?.cloture" placeholder="Quantité"
+            (blur)="add_detail_inventaires(one_stock.id, one_rangement.id, one_rangement.quantite_reelle)" />
+        </div>
+      </td>
+    </tr>
+    }
+    }
+    }
+
+  </tbody>
+</table>
+
+<!-- Empty state -->
+<div *ngIf="!loading_get_detail_inventaires && detail_inventaires.length === 0" class="text-center py-5">
+  <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#6c757d" class="bi bi-info-circle mb-3"
+    viewBox="0 0 16 16">
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+    <path
+      d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+  </svg>
+  <p class="fs-5 text-muted">Pas de données</p>
+</div>

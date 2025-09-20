@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonFab, IonFabButton, IonList, IonItemSliding, IonItem, IonLabel, IonItemOption, IonItemOptions, IonButton, IonBadge } from '@ionic/angular/standalone';
 import { ApiService } from '../service/api/api.service';
+import { ListDetailInventairesComponent } from '../components/components/inventaires/list-detail-inventaires/list-detail-inventaires.component';
 
 @Component({
   selector: 'app-inventaires',
@@ -13,7 +14,7 @@ import { ApiService } from '../service/api/api.service';
 })
 export class InventairesPage implements OnInit {
 
-loading_get_inventaires = false
+  loading_get_inventaires = false
   inventaires: any[] = []
   selected_inventaires: any = undefined
   inventaires_to_edit: any = undefined
@@ -107,5 +108,21 @@ loading_get_inventaires = false
     // })
   }
 
+  async openModal_detail_inventaires(one_inventaires: any) {
+    const modal = await this.modalService.create({
+      component: ListDetailInventairesComponent,
+      componentProps: {
+        id_inventaire: one_inventaires.id
+      }
+    });
+    modal.present();
 
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      // this.service.successMessage("Commande ajoutée");
+      // this.get_ventes()
+    }
+
+  }
 }
