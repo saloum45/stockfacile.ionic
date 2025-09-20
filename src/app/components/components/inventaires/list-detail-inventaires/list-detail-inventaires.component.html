@@ -58,7 +58,128 @@
   </ng-container>
 
 
+<!-- Debut  -->
 
+  <!-- Skeleton / loader -->
+  <ng-container *ngIf="loading_get_detail_inventaires">
+    <ion-skeleton-text animated style="width: 100%; height: 100px"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 100%; height: 100px"></ion-skeleton-text>
+  </ng-container>
+
+  <!-- Liste principale -->
+  <ion-list *ngIf="!loading_get_detail_inventaires">
+    <ion-card *ngFor="let one_stock of list" class="ion-margin-bottom">
+      <ion-card-header>
+        <ion-card-title class="ion-text-primary">
+          {{ one_stock.libelle_produit }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <!-- Aucun entrepôt -->
+        <div *ngIf="!one_stock.entrepots?.length">
+          <ion-button
+            size="small"
+            color="primary"
+            fill="outline"
+            (click)="one_stock.showAddEntrepotSelect = !one_stock.showAddEntrepotSelect"
+            [disabled]="inventaire?.cloture"
+          >
+            <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+            Ajouter un entrepôt
+          </ion-button>
+
+          <ion-select
+            *ngIf="one_stock.showAddEntrepotSelect"
+            placeholder="Choisir un entrepôt"
+            [(ngModel)]="one_stock.selectedEntrepotId"
+            (ionChange)="ajouterEntrepot(one_stock)"
+          >
+            <ion-select-option
+              *ngFor="let e of form_details?.entrepot_rangements"
+              [value]="e.id"
+              [disabled]="api.is_already_selected(e.id, one_stock.entrepots, 'id')"
+            >
+              {{ e.libelle_entrepot }}
+            </ion-select-option>
+          </ion-select>
+        </div>
+
+        <!-- Entrepôts -->
+        <ion-accordion-group *ngIf="one_stock.entrepots?.length">
+          <ion-accordion *ngFor="let one_entrepot of one_stock.entrepots">
+            <ion-item slot="header" lines="full">
+              <ion-label>{{ one_entrepot.nom }}</ion-label>
+              <ion-button
+                slot="end"
+                fill="clear"
+                size="small"
+                (click)="one_entrepot.showAddRangementSelect = !one_entrepot.showAddRangementSelect"
+                [disabled]="inventaire?.cloture"
+              >
+                <ion-icon name="add-circle-outline"></ion-icon>
+              </ion-button>
+            </ion-item>
+
+            <div slot="content" class="ion-padding-start">
+              <!-- Select rangement si vide -->
+              <div *ngIf="!one_entrepot.rangements?.length">
+                <ion-select
+                  placeholder="Choisir un rangement"
+                  [(ngModel)]="one_entrepot.selectedRangementId"
+                  (ionChange)="ajouterRangement(one_entrepot, one_stock)"
+                >
+                  <ion-select-option
+                    *ngFor="let r of get_entrepot_rangements(one_entrepot.id)"
+                    [value]="r.id"
+                    [disabled]="api.is_already_selected(r.id, one_entrepot.rangements, 'id')"
+                  >
+                    {{ r.libelle_rangement }}
+                  </ion-select-option>
+                </ion-select>
+              </div>
+
+              <!-- Rangements -->
+              <ion-list *ngIf="one_entrepot.rangements?.length">
+                <ion-item-sliding *ngFor="let one_rangement of one_entrepot.rangements">
+                  <ion-item>
+                    <ion-label>
+                      <h3>{{ one_rangement.nom }}</h3>
+                      <p *ngIf="one_rangement.deja_inventaire" class="ion-text-success">
+                        <ion-icon name="checkmark-circle"></ion-icon>
+                        Inventorié
+                      </p>
+                    </ion-label>
+
+                    <ion-badge color="success" slot="end">
+                      {{ one_rangement.quantite }}
+                    </ion-badge>
+                  </ion-item>
+
+                  <ion-item-options side="end">
+                    <ion-item-option color="primary" expandable="true">
+                      <ion-input
+                        placeholder="Réel"
+                        type="number"
+                        [disabled]="inventaire?.cloture"
+                        [(ngModel)]="one_rangement.quantite_reelle"
+                        (ionBlur)="add_detail_inventaires(one_stock.id, one_rangement.id, one_rangement.quantite_reelle)"
+                        class="ion-text-center"
+                      ></ion-input>
+                    </ion-item-option>
+                  </ion-item-options>
+                </ion-item-sliding>
+              </ion-list>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
+
+<!-- Fin -->
 
   <!-- IonFab -->
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">

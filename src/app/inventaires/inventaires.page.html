@@ -32,9 +32,9 @@
 
             <ion-badge class="" [ngClass]="{
               'bg-success-subtle text-success-emphasis':
-                one_inventaire?.cloture === 1,
-              'bg-danger-subtle text-danger-emphasis':
-                one_inventaire?.cloture === 0
+                one_inventaire?.cloture,
+              'bg-warning-subtle text-warning-emphasis':
+                !one_inventaire?.cloture
             }">
               {{ (one_inventaire?.cloture)?'Clôturé':'Non clôturé' }}
             </ion-badge>
