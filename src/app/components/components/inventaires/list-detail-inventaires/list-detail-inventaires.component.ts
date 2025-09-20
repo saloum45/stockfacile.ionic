@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, ModalController, IonFab, IonFabButton, IonList, IonItemSliding, IonItem, IonLabel, IonItemOption, IonItemOptions, IonButton, IonBadge,IonChip,IonFabList,IonSkeletonText,IonCard,IonCardHeader,IonCardTitle,IonCardContent,IonIcon,IonSelectOption,IonAccordion,IonAccordionGroup ,IonNote,IonItemDivider,IonText} from '@ionic/angular/standalone';
 import { CountUpPipe } from "../../../../pipes/count-up-pipe";
+import { addIcons } from 'ionicons';
+import { addCircleOutline, checkmarkCircle } from 'ionicons/icons';
 @Component({
   selector: 'app-list-detail-inventaires',
   standalone: true, // Composant autonome
@@ -34,6 +36,7 @@ export class ListDetailInventairesComponent {
   valeur_stock=0;
   constructor(public api: ApiService, public modalService: ModalController) {
     // this.id_inventaire = this.route.snapshot.params['id']
+    addIcons({addCircleOutline,checkmarkCircle})
   }
   ngOnInit(): void {
     this.get_detail_inventaires()
